@@ -6,7 +6,9 @@ Comprehensive documentation for installing, configuring, and daily usage of atli
 
 ## 1. System Requirements & Dependencies
 
-atlifm requires a Linux distribution with a modern C++23 capable compiler (GCC 13+ or Clang 16+) and Qt6. A monospace Nerd Font is recommended; if none is installed, atlifm falls back to DejaVu Sans Mono.
+atlifm requires a Linux distribution with Qt 6.5 or newer. A monospace Nerd Font is recommended; if none is installed, atlifm falls back to DejaVu Sans Mono.
+
+Prebuilt packages for Arch Linux, Debian/Ubuntu, Fedora/RHEL, Alpine, every architecture and the self-contained AppImage are listed on the [Downloads](/docs/downloads) page. The dependencies below are only needed when building from source.
 
 ### Arch Linux / Manjaro
 
@@ -30,10 +32,10 @@ sudo apt install build-essential cmake ninja-build qt6-base-dev qt6-base-private
 
 ## 2. Compilation and Installation
 
-Build atlifm from source using CMake and Ninja:
+Most users should install a prebuilt package from the [Downloads](/docs/downloads) page. To build atlifm from source, use CMake and Ninja:
 
 ```bash
-git clone https://github.com/1nfys/consplorer.git atlifm
+git clone https://github.com/1nfys/atlifm.git
 cd atlifm
 cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
 ninja -C build
@@ -44,6 +46,7 @@ To install atlifm into `~/.local`:
 ```bash
 cmake --install build --prefix ~/.local
 update-desktop-database ~/.local/share/applications
+atlifm --setup-portal
 ```
 
 The binary accepts a directory as an optional argument (`atlifm ~/Downloads`) and is also used as the XDG portal backend when launched with `--portal`.

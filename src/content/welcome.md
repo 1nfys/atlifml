@@ -41,7 +41,8 @@ atlifm bridges this gap. It preserves the strict monospace, border-aligned, zero
 | ---- | ----- |
 | Language and toolkit | C++23, Qt6 |
 | License | MIT |
-| Source code | `https://github.com/1nfys/consplorer` |
+| Source code | `https://github.com/1nfys/atlifm` |
+| Downloads | [GitHub Releases](https://github.com/1nfys/atlifm/releases/latest) |
 | Configuration | Plain text files in `~/.config/atlifm/` |
 | Interface languages | English |
 
@@ -49,6 +50,7 @@ atlifm bridges this gap. It preserves the strict monospace, border-aligned, zero
 
 ## Where to Go Next
 
-* **User Guide**: installation, keyboard shortcuts, the interactive cheat sheet, portal setup, and theme customization.
+* **Downloads**: prebuilt packages for Arch, Debian/Ubuntu, Fedora/RHEL, Alpine, the AppImage, and source builds.
+* **User Guide**: keyboard shortcuts, the interactive cheat sheet, portal setup, daily usage, and theme customization.
 * **Plugin Developer Guide**: the plugin engine in depth, including custom actions, overrides, preview plugins, event hooks, script plugins, environment variables, and the native C++ ABI.
 * **Configuration Reference**: every configuration file, key, and environment variable in one place.

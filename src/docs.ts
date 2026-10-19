@@ -1,4 +1,5 @@
 import welcome from "./content/welcome.md?raw";
+import downloads from "./content/downloads.md?raw";
 import userGuide from "./content/user-guide.md?raw";
 import pluginGuide from "./content/plugin-developer-guide.md?raw";
 import configReference from "./content/configuration-reference.md?raw";
@@ -15,9 +16,10 @@ export interface DocMeta {
 
 export const docs: DocMeta[] = [
   { slug: "welcome", title: "Welcome to atlifm", num: "1", body: welcome },
-  { slug: "user-guide", title: "User Guide", num: "2", body: userGuide },
-  { slug: "plugin-developer-guide", title: "Plugin Developer Guide", num: "3", body: pluginGuide },
-  { slug: "configuration-reference", title: "Configuration Reference", num: "4", body: configReference },
+  { slug: "downloads", title: "Downloads", num: "2", body: downloads },
+  { slug: "user-guide", title: "User Guide", num: "3", body: userGuide },
+  { slug: "plugin-developer-guide", title: "Plugin Developer Guide", num: "4", body: pluginGuide },
+  { slug: "configuration-reference", title: "Configuration Reference", num: "5", body: configReference },
 ];
 
 export interface TocItem {

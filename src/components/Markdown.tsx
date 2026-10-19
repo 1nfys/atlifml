@@ -1,6 +1,7 @@
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
+import { Link } from "react-router-dom";
 import { extractText, slugify } from "../docs";
 
 interface Props {
@@ -19,16 +20,26 @@ const components: Components = {
       {children}
     </h3>
   ),
-  a: ({ node: _node, href, children, ...props }) => (
-    <a
-      href={href}
-      target={href?.startsWith("http") ? "_blank" : undefined}
-      rel={href?.startsWith("http") ? "noreferrer" : undefined}
-      {...props}
-    >
-      {children}
-    </a>
-  ),
+  a: ({ node: _node, href, children, ...props }) => {
+    if (href?.startsWith("/") && !href.startsWith("//")) {
+      return (
+        <Link to={href} {...props}>
+          {children}
+        </Link>
+      );
+    }
+
+    return (
+      <a
+        href={href}
+        target={href?.startsWith("http") ? "_blank" : undefined}
+        rel={href?.startsWith("http") ? "noreferrer" : undefined}
+        {...props}
+      >
+        {children}
+      </a>
+    );
+  },
 };
 
 export default function Markdown({ body }: Props) {

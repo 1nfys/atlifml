@@ -28,7 +28,7 @@ export default function App() {
         <Route
           path="/docs/:slug"
           element={
-            <Suspense fallback={<main className="landing"><p className="dim">loading documentation…</p></main>}>
+            <Suspense fallback={<main className="notfound-page"><p className="dim">loading documentation…</p></main>}>
               <DocsPage />
             </Suspense>
           }

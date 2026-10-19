@@ -4,7 +4,7 @@ atlifm **1.0.0** is available as prebuilt packages for Linux on **x86_64** and *
 
 Every artifact is attached to the [GitHub release](https://github.com/1nfys/atlifm/releases/latest). Binary packages use the Qt 6 libraries provided by your distribution; the AppImage bundles Qt and runs on distributions with glibc 2.38 or newer.
 
-atlifm is also published through [Fedora COPR](https://copr.fedorainfracloud.org/coprs/1nfys/atlifm/), the [Ubuntu PPA](https://launchpad.net/~1nfys/+archive/ubuntu/atlifm) and the [openSUSE Build Service](https://build.opensuse.org/package/show/home:1nfys/atlifm).
+atlifm is also published through [Fedora COPR](https://copr.fedorainfracloud.org/coprs/1nfys/atlifm/), the [Ubuntu PPA](https://launchpad.net/~1nfys/+archive/ubuntu/atlifm) and the [openSUSE Build Service](https://build.opensuse.org/package/show/home:1nfys/atlifm), which carries a zypper repository for openSUSE Tumbleweed and repositories for Debian, Ubuntu and Fedora.
 
 ***
 
@@ -25,7 +25,7 @@ The table lists the release range covered by prebuilt packages. Older distributi
 | Fedora / RHEL | `atlifm-1.0.0-1.fc44.x86_64.rpm`, `atlifm-1.0.0-1.fc44.aarch64.rpm` | x86_64, aarch64 |
 | Alpine Linux | `atlifm-1.0.0-r0-x86_64.apk`, `atlifm-1.0.0-r0-aarch64.apk` | x86_64, aarch64 |
 | Any glibc 2.38+ distribution | `atlifm-1.0.0-x86_64.AppImage`, `atlifm-1.0.0-aarch64.AppImage` | x86_64, aarch64 |
-| OBS repository | Debian 13, Ubuntu 26.04, Fedora 43 / 44 | x86_64, aarch64 |
+| OBS repository | openSUSE Tumbleweed, Debian 13, Ubuntu 26.04, Fedora 43 / 44 | x86_64, aarch64 |
 | Source | `atlifm-1.0.0-fixed.tar.gz`, `atlifm_1.0.0.orig.tar.gz` | all |
 
 The release page also contains debug symbols, the Debian source package (`.dsc`, `.debian.tar.xz`) and the RPM source package (`.src.rpm`).
@@ -101,7 +101,15 @@ sudo dnf install ./atlifm-1.0.0-1.fc44.aarch64.rpm    # aarch64
 
 ## openSUSE Build Service
 
-The [OBS project](https://build.opensuse.org/package/show/home:1nfys/atlifm) publishes signed repositories for Debian 13, Ubuntu 26.04 and Fedora 43/44. Installing from a repository gives you updates through the normal package manager.
+The [OBS project](https://build.opensuse.org/package/show/home:1nfys/atlifm) publishes signed repositories for openSUSE Tumbleweed, Debian 13, Ubuntu 26.04 and Fedora 43/44. Installing from a repository gives you updates through the normal package manager.
+
+### openSUSE Tumbleweed
+
+```bash
+sudo zypper addrepo https://download.opensuse.org/repositories/home:/1nfys/openSUSE_Tumbleweed/home:1nfys.repo
+sudo zypper refresh
+sudo zypper install atlifm
+```
 
 ### Debian 13
 
@@ -169,6 +177,9 @@ sudo pacman -S base-devel gcc cmake ninja qt6-base qt6-svg
 
 # Fedora / RHEL
 sudo dnf install gcc-c++ cmake ninja-build qt6-qtbase-devel qt6-qtsvg-devel
+
+# openSUSE Tumbleweed
+sudo zypper install gcc-c++ cmake ninja qt6-base-devel qt6-svg-devel
 
 # Debian / Ubuntu
 sudo apt install build-essential cmake ninja-build qt6-base-dev qt6-base-private-dev libqt6svg6-dev

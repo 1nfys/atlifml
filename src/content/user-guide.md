@@ -8,7 +8,7 @@ Comprehensive documentation for installing, configuring, and daily usage of atli
 
 atlifm requires a Linux distribution with Qt 6.5 or newer. A monospace Nerd Font is recommended; if none is installed, atlifm falls back to DejaVu Sans Mono.
 
-Prebuilt packages for Arch Linux, Debian/Ubuntu, Fedora/RHEL, Alpine, every architecture and the self-contained AppImage are listed on the [Downloads](/docs/downloads) page. The dependencies below are only needed when building from source.
+Prebuilt packages for Arch Linux, Debian/Ubuntu, Fedora/RHEL, openSUSE Tumbleweed, Alpine, every architecture and the self-contained AppImage are listed on the [Downloads](/docs/downloads) page. The dependencies below are only needed when building from source.
 
 ### Arch Linux / Manjaro
 
@@ -20,6 +20,12 @@ sudo pacman -S base-devel gcc cmake ninja qt6-base qt6-svg
 
 ```bash
 sudo dnf install gcc-c++ cmake ninja-build qt6-qtbase-devel qt6-qtsvg-devel
+```
+
+### openSUSE Tumbleweed
+
+```bash
+sudo zypper install gcc-c++ cmake ninja qt6-base-devel qt6-svg-devel
 ```
 
 ### Ubuntu / Debian

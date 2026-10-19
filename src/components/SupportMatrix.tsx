@@ -4,6 +4,7 @@ const supported = [
   { name: "Debian", versions: "13 (trixie) +", channel: "deb · obs" },
   { name: "Ubuntu", versions: "26.04 LTS +", channel: "ppa · obs · deb" },
   { name: "Fedora", versions: "43 - 45", channel: "copr · obs · rpm" },
+  { name: "openSUSE", versions: "Tumbleweed (rolling)", channel: "zypper · obs · rpm" },
   { name: "RHEL / CentOS Stream", versions: "10 (EPEL 10)", channel: "copr" },
   { name: "Alpine Linux", versions: "3.22 +", channel: "apk" },
   { name: "Any glibc distribution", versions: "glibc 2.38+", channel: "appimage" },

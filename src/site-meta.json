@@ -13,7 +13,7 @@
     {
       "slug": "downloads",
       "title": "Downloads",
-      "description": "Install atlifm on Debian, Ubuntu, Fedora, RHEL, Arch, Alpine or as an AppImage. Packages from COPR, the Ubuntu PPA and the openSUSE Build Service."
+      "description": "Install atlifm on openSUSE Tumbleweed, Debian, Ubuntu, Fedora, RHEL, Arch, Alpine or as an AppImage. Packages from COPR, the Ubuntu PPA and the openSUSE Build Service."
     },
     {
       "slug": "user-guide",

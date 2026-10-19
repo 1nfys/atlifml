@@ -91,6 +91,19 @@ const installs = {
       href: `${RELEASES_URL}/download/atlifm-1.0.0-1.fc44.x86_64.rpm`,
     },
   },
+  opensuse: {
+    label: "opensuse",
+    channel: "zypper",
+    note: "signed obs repository for openSUSE Tumbleweed, x86_64 and aarch64. zypper resolves the qt6 dependencies.",
+    commands: [
+      "sudo zypper addrepo https://download.opensuse.org/repositories/home:/1nfys/openSUSE_Tumbleweed/home:1nfys.repo",
+      "sudo zypper install atlifm",
+    ],
+    download: {
+      label: "obs repo",
+      href: "https://download.opensuse.org/repositories/home:/1nfys/openSUSE_Tumbleweed/",
+    },
+  },
   ubuntu: {
     label: "ubuntu",
     channel: "ppa",
@@ -118,7 +131,7 @@ const installs = {
   obs: {
     label: "obs repository",
     channel: "debian 13",
-    note: "signed repository built on the openSUSE Build Service. ubuntu 26.04 and fedora 44 repos are in the download guide.",
+    note: "signed repositories built on the openSUSE Build Service for Debian, Ubuntu, Fedora and openSUSE Tumbleweed. see the download guide for every repo url.",
     commands: [
       "echo 'deb https://download.opensuse.org/repositories/home:/1nfys/Debian_13/ /' | sudo tee /etc/apt/sources.list.d/atlifm.list",
       "curl -fsSL https://download.opensuse.org/repositories/home:/1nfys/Debian_13/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/atlifm.gpg > /dev/null",
@@ -433,7 +446,7 @@ export default function Landing() {
               <div className="install-foot">
                 <span>x86_64 + aarch64</span>
                 <span className="sep">|</span>
-                <span>debian 13+ · ubuntu 26.04+ · fedora 43-45 · alpine 3.22+</span>
+                <span>debian 13+ · ubuntu 26.04+ · fedora 43-45 · opensuse tumbleweed · alpine 3.22+</span>
                 <span className="footer-spacer" />
                 <a href={RELEASES_URL} target="_blank" rel="noreferrer">
                   releases ↗

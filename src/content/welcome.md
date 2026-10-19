@@ -50,7 +50,7 @@ atlifm bridges this gap. It preserves the strict monospace, border-aligned, zero
 
 ## Where to Go Next
 
-* **Downloads**: prebuilt packages for Arch, Debian/Ubuntu, Fedora/RHEL, Alpine, the AppImage, and source builds.
+* **Downloads**: prebuilt packages for Arch, Debian/Ubuntu, Fedora/RHEL, openSUSE Tumbleweed, Alpine, the AppImage, and source builds.
 * **User Guide**: keyboard shortcuts, the interactive cheat sheet, portal setup, daily usage, and theme customization.
 * **Plugin Developer Guide**: the plugin engine in depth, including custom actions, overrides, preview plugins, event hooks, script plugins, environment variables, and the native C++ ABI.
 * **Configuration Reference**: every configuration file, key, and environment variable in one place.

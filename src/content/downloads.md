@@ -75,7 +75,7 @@ sudo apt install ./atlifm_1.0.0-1_arm64.deb     # aarch64
 
 ## Fedora / RHEL
 
-The package is published in COPR for Fedora 43–45 and EPEL 10:
+The package is published in COPR for Fedora 43-45 and EPEL 10:
 
 ```bash
 sudo dnf copr enable 1nfys/atlifm

@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-production build (also builds 404.html for github pages copy):
+production build (prerenders documentation pages and 404.html with per-page search metadata):
 
 ```sh
 npm run build

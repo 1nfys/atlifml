@@ -433,7 +433,7 @@ export default function Landing() {
               <div className="install-foot">
                 <span>x86_64 + aarch64</span>
                 <span className="sep">|</span>
-                <span>debian 13+ · ubuntu 26.04+ · fedora 43–45 · alpine 3.22+</span>
+                <span>debian 13+ · ubuntu 26.04+ · fedora 43-45 · alpine 3.22+</span>
                 <span className="footer-spacer" />
                 <a href={RELEASES_URL} target="_blank" rel="noreferrer">
                   releases ↗

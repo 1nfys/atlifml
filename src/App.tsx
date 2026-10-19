@@ -4,6 +4,7 @@ import TabBar from "./components/TabBar";
 import Footer from "./components/Footer";
 import Landing from "./pages/Landing";
 import NotFound from "./pages/NotFound";
+import { usePageMeta } from "./seo";
 
 const DocsPage = lazy(() => import("./pages/DocsPage"));
 
@@ -17,10 +18,16 @@ function ScrollToTop() {
   return null;
 }
 
+function RouteMeta() {
+  usePageMeta();
+  return null;
+}
+
 export default function App() {
   return (
     <BrowserRouter basename={basename}>
       <ScrollToTop />
+      <RouteMeta />
       <TabBar />
       <Routes>
         <Route path="/" element={<Landing />} />

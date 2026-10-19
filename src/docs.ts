@@ -3,6 +3,7 @@ import downloads from "./content/downloads.md?raw";
 import userGuide from "./content/user-guide.md?raw";
 import pluginGuide from "./content/plugin-developer-guide.md?raw";
 import configReference from "./content/configuration-reference.md?raw";
+import siteMeta from "./site-meta.json";
 
 export const REPO_URL = "https://github.com/1nfys/atlifm";
 export const SITE_REPO_URL = "https://github.com/1nfys/atlifml";
@@ -10,17 +11,24 @@ export const SITE_REPO_URL = "https://github.com/1nfys/atlifml";
 export interface DocMeta {
   slug: string;
   title: string;
+  description: string;
   num: string;
   body: string;
 }
 
-export const docs: DocMeta[] = [
-  { slug: "welcome", title: "Welcome to atlifm", num: "1", body: welcome },
-  { slug: "downloads", title: "Downloads", num: "2", body: downloads },
-  { slug: "user-guide", title: "User Guide", num: "3", body: userGuide },
-  { slug: "plugin-developer-guide", title: "Plugin Developer Guide", num: "4", body: pluginGuide },
-  { slug: "configuration-reference", title: "Configuration Reference", num: "5", body: configReference },
-];
+const bodies: Record<string, string> = {
+  welcome,
+  downloads,
+  "user-guide": userGuide,
+  "plugin-developer-guide": pluginGuide,
+  "configuration-reference": configReference,
+};
+
+export const docs: DocMeta[] = siteMeta.docs.map((doc, index) => ({
+  ...doc,
+  num: String(index + 1),
+  body: bodies[doc.slug] ?? "",
+}));
 
 export interface TocItem {
   level: number;

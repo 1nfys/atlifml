@@ -1,0 +1,34 @@
+{
+  "siteUrl": "https://1nfys.github.io/atlifml",
+  "siteName": "atlifm",
+  "title": "atlifm - terminal-style file manager for Linux",
+  "description": "atlifm is a mouse-first, terminal-style file manager for Linux with Miller columns, tabs, previews, interactive archives, drag and drop, plugins and an XDG desktop portal.",
+  "ogImage": "https://1nfys.github.io/atlifml/og-image.png",
+  "docs": [
+    {
+      "slug": "welcome",
+      "title": "Welcome to atlifm",
+      "description": "Introduction to atlifm: a terminal-style file manager for Linux with Miller columns, tabs, previews, archives, drag and drop and an XDG desktop portal."
+    },
+    {
+      "slug": "downloads",
+      "title": "Downloads",
+      "description": "Install atlifm on Debian, Ubuntu, Fedora, RHEL, Arch, Alpine or as an AppImage. Packages from COPR, the Ubuntu PPA and the openSUSE Build Service."
+    },
+    {
+      "slug": "user-guide",
+      "title": "User Guide",
+      "description": "Learn how to use atlifm: navigation, tabs, previews, archives, drag and drop, bookmarks, undo, keybindings and the XDG file chooser portal."
+    },
+    {
+      "slug": "plugin-developer-guide",
+      "title": "Plugin Developer Guide",
+      "description": "Build atlifm plugins: configuration actions, shell scripts and native C++ plugins through a stable C ABI."
+    },
+    {
+      "slug": "configuration-reference",
+      "title": "Configuration Reference",
+      "description": "Complete atlifm configuration reference: config files, keybindings, themes, plugins and desktop portal settings."
+    }
+  ]
+}

@@ -13,7 +13,7 @@ Plugins are plain-text files located in `~/.config/atlifm/plugins/`:
 * **Dynamic discovery**: atlifm scans and loads plugins on startup; plugins can be added, edited, or removed without rebuilding.
 * **Directory override**: set the `ATLIFM_CONFIG_DIR` environment variable to redirect all configuration lookups, which is useful for testing with an isolated profile.
 * **Conflicts**: when a script and a `.conf` file share the same base name, the `.conf` definition wins and the script is ignored. A same-named `.conf` or script also takes over the menu entry of a native `.so` plugin, although the plugin still services its overrides, previews, and hooks.
-* **C++ plugins**: a compiled `*.so` in the same directory exporting `atlifm_plugin_init` is loaded in-process through a stable C ABI; see section 9.
+* **C++ plugins**: a compiled `*.so` in the same directory exporting `atlifm_plugin_init` is loaded in-process through a stable C ABI; see section 10.
 
 Plugin integration points:
 
@@ -41,6 +41,11 @@ When a plugin configuration contains invalid values, the offending entries are s
 | `Description` | String  | Tooltip description for the plugin entry.                                                                               |
 | `Action`      | String  | Registers a custom action ID that can be bound to keys in `keybinds.conf`.                                              |
 | `Keys`        | String  | Default keyboard shortcut for the action (for example, `Ctrl+Alt+V`). Users may rebind or disable it like any built-in action. |
+| `Command`     | String  | Optional. Unique lowercase command token for the `Ctrl+F` status bar input. Typing `token ` activates this plugin. Cannot override built-in `fd` or `rg`. |
+| `CommandMode` | String  | `query` (passes text typed after token to plugin via `ATLIFM_QUERY`) or `action` (ignores typed text, runs on Enter). Default: `query`. |
+| `CommandTitle`| String  | Tooltip title displayed in the status bar completion popup.                                                             |
+| `CommandDescription` | String | Explanatory description shown in the status bar completion popup.                                                |
+| `CommandPlaceholder` | String | Placeholder hint displayed in the input field when the token is recognized (for example, `pattern`).                    |
 | `Override`    | List    | Comma-separated built-in action IDs to intercept.                                                                       |
 | `Hook`        | List    | Comma-separated event names to run the plugin on: `on_start`, `on_navigate`, `on_select`. The keys `Hook` and `Hooks` are equivalent. |
 
@@ -74,6 +79,8 @@ Every plugin process receives contextual information through the environment:
 | `ATLIFM_TARGET`    | First selected path; falls back to the current directory.                                                                          |
 | `ATLIFM_PID`       | Process ID of the running atlifm instance.                                                                                         |
 | `ATLIFM_ACTION`    | The plugin's own `Action` ID when it defines one; `preview` for preview plugins. Not set when the plugin has no `Action`.          |
+| `ATLIFM_QUERY`     | The search query typed after the command token in the `Ctrl+F` status bar input. Only set for command plugins.                     |
+
 
 Selected item paths are also appended as trailing positional arguments after the command specified in `Exec`. Running a plugin from an empty background selection targets the current directory itself: the directory path is appended instead.
 
@@ -135,7 +142,40 @@ Everything triggered by the action engine is overridable, including:
 
 ***
 
-## 6. Preview Plugins
+## 6. Status Bar Command Tokens (`Ctrl+F`)
+
+In addition to custom actions and context menu entries, plugins can register dedicated command tokens triggered directly from the filter bar (`Ctrl+F`), similar to the built-in `fd` and `rg` tools:
+
+```ini
+Command = find                 # unique token typed before a space; case-insensitive
+CommandMode = query            # query (pass typed text to plugin) | action (ignore text)
+CommandTitle = Find in project
+CommandDescription = Search within the current selection
+CommandPlaceholder = pattern
+```
+
+* **Interactive Typing**: When you press `Ctrl+F` and type `find pattern`, atlifm highlights `find` as a recognized command token and displays the custom placeholder.
+* **Execution**: Pressing `Enter` runs the plugin with `pattern` available in the `ATLIFM_QUERY` environment variable (for external plugins) or the `inv->query` parameter (for native C++ plugins).
+* **Command Modes**: In `CommandMode = query` (default), the typed arguments are forwarded to the plugin. In `CommandMode = action`, trailing query text is ignored and the action executes immediately on `Enter`.
+* **Esc Behavior**: Pressing `Esc` clears the token recognition, returning the input box to standard filename filter mode.
+* **Reserved Tokens**: Custom command tokens cannot override the reserved built-in tokens `fd` and `rg`.
+
+### Multi-Pane Window Output (`@@pane:N`)
+
+While ordinary actions stream output into a compact bottom-right corner overlay, command plugins open a full-height **three-pane TUI overlay** spanning the Miller columns (parent, center, preview):
+
+* **External Plugins & Scripts**: Send lines beginning with markers to route output into specific columns:
+  * `@@pane:0` directs subsequent text into the left pane (parent column).
+  * `@@pane:1` directs subsequent text into the center pane (current column, default).
+  * `@@pane:2` directs subsequent text into the right pane (preview column).
+  * Any text printed before the first marker is placed in the center pane (`pane 1`).
+* **Native C++ Plugins**: Call `output_write_pane(pane, text)` with `pane` set to `0`, `1`, or `2`. Standard `output_write(text)` appends to the center pane (`1`).
+* **Formatting**: Text is rendered in monospace with no word-wrapping and horizontal scrollbars as needed, preserving UTF-8 tables, ANSI-free ASCII art, and terminal pseudographics.
+* **Dismissing**: Press `Esc` or click `Close` in the overlay header to dismiss the three-pane view and return focus directly to the Miller columns.
+
+***
+
+## 7. Preview Plugins
 
 Set `Type = preview` to replace the built-in preview pane for matching files:
 
@@ -156,7 +196,7 @@ Behavior:
 
 ***
 
-## 7. Event Hooks
+## 8. Event Hooks
 
 The `Hook` key runs a plugin in the background when application events occur:
 
@@ -176,7 +216,7 @@ Hook = on_start, on_navigate
 
 ***
 
-## 8. Script Plugins
+## 9. Script Plugins
 
 Any executable file named `*.sh`, `*.py`, or `*.bash` inside the plugins directory is registered as a plugin automatically:
 
@@ -200,9 +240,9 @@ Its output appears in the overlay when the script is launched from the `Plugins`
 
 ***
 
-## 9. C++ plugins (ABI v1)
+## 10. Native C++ Plugins (ABI v1)
 
-plugins are shared libraries (`*.so`) placed in the plugins directory and loaded in-process. They use a stable C ABI declared in `atlifm-core/atlifm-plugin-api.h` and participate in the same menus, keybindings, override dispatcher, preview pane, and hook system as `.conf` plugins.
+Native plugins are shared libraries (`*.so`) placed in the plugins directory and loaded in-process. They use a stable C ABI declared in `atlifm-core/atlifm-plugin-api.h` and participate in the same menus, keybindings, override dispatcher, preview pane, and hook system as `.conf` plugins.
 
 ### Building and Installing
 
@@ -235,7 +275,8 @@ Registrations are only accepted while `atlifm_plugin_init` runs; the host copies
 | Function                                       | Description                                                                                                                       |
 | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | `host_version()`                                | atlifm version string.                                                                                                            |
-| `output_write(text)`                            | Appends text to the terminal output overlay of the current run. Available inside actions and overrides, not inside hooks.         |
+| `output_write(text)`                            | Appends text to the terminal output overlay (or center pane in command mode). Available inside actions and overrides. |
+| `output_write_pane(pane, text)`                 | Appends text to a specific pane in the three-pane command view: `0` (parent), `1` (center), or `2` (preview). Automatically opens the 3-pane overlay. |
 | `notify(message)`                               | Shows a short status bar message.                                                                                                 |
 | `run_command(line, detach)`                     | Runs an external command. `detach = 0` streams merged output into the current overlay; `detach = 1` launches it in the background. Selection paths are appended to the command line like for `.conf` plugins. Returns `0` on success. |
 | `refresh()`                                     | Reloads directory listings and bookmarks after on-disk changes.                                                                   |
@@ -257,17 +298,24 @@ typedef struct AtlifmInvocation {
     const char* cwd;
     const char* const* selection;
     size_t selection_count;
+    const char* query;
 } AtlifmInvocation;
 ```
 
-All strings are UTF-8 and remain valid only for the duration of the call; copy anything you need to keep.
+All strings are UTF-8 and remain valid only for the duration of the call; copy anything you need to keep. `query` contains the search query typed after the command token in `Ctrl+F` status bar input.
 
-### Actions
+### Actions & Command Tokens
 
 ```c++
 static int hello(const AtlifmInvocation* inv, void* user) {
     auto* api = static_cast<const AtlifmHostApi*>(user);
-    api->output_write("hello from plugin\n");
+    if (inv->query && *inv->query) {
+        api->output_write("hello query: ");
+        api->output_write(inv->query);
+        api->output_write("\n");
+    } else {
+        api->output_write("hello from plugin\n");
+    }
     return 0;
 }
 
@@ -277,6 +325,11 @@ d.id = "hello_banner";
 d.name = "Hello Banner";
 d.description = "Example action";
 d.keys = "Ctrl+Alt+H";
+d.command = "hello";
+d.command_mode = "query";
+d.command_title = "Hello Native";
+d.command_description = "Run the native hello command";
+d.command_placeholder = "pattern";
 d.applies_to = "any";
 d.extensions = ".log,.txt";
 d.run = hello;
@@ -284,7 +337,7 @@ d.user = const_cast<AtlifmHostApi*>(api);
 api->register_action(&d);
 ```
 
-Actions appear in the `Plugins` submenu, can be rebound in `keybinds.conf`, and show up in the cheat sheet (`F1`) under `PLUGINS`. The optional `enabled` callback hides the entry when it returns `0` or less. Action IDs must be unique across all plugins.
+Actions appear in the `Plugins` submenu, can be rebound in `keybinds.conf`, and show up in the cheat sheet (`F1`) under `PLUGINS`. When `command` is set, typing the token in the `Ctrl+F` status bar activates the command. The optional `enabled` callback hides the entry when it returns `0` or less. Action IDs must be unique across all plugins.
 
 ### Overrides
 
@@ -319,7 +372,7 @@ api->register_preview(".hello", render, user);
 
 ***
 
-## 10. Practical Plugin Examples
+## 11. Practical Plugin Examples
 
 ### Example A: Code Editor Launcher
 
@@ -419,7 +472,7 @@ Hook = on_navigate
 
 ***
 
-## 11. Tips and Troubleshooting
+## 12. Tips and Troubleshooting
 
 * Invalid `Action` or `Override` values never fail silently: hover the plugin entry in the `Plugins` submenu to see the rejection reason.
 * Use `ATLIFM_CONFIG_DIR` for an isolated test profile: `ATLIFM_CONFIG_DIR=/tmp/atlifm-test atlifm`.

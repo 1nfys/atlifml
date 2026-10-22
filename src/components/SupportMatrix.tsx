@@ -59,7 +59,7 @@ export default function SupportMatrix() {
           <span className="support-key legacy" />
           <span>use the AppImage or build from source</span>
           <span className="footer-spacer" />
-          <span>atlifm 1.0.0</span>
+          <span>atlifm 1.0.1</span>
         </div>
       </div>
     </div>

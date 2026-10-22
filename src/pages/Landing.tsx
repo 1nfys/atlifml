@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import mainShot from "../assets/main-window.png";
 import chooserShot from "../assets/file-chooser.png";
+import LogoDots from "../components/LogoDots";
 import { REPO_URL } from "../docs";
 
 const RELEASES_URL = "https://github.com/1nfys/atlifm/releases/latest";
-const RELEASE_URL = "https://github.com/1nfys/atlifm/releases/tag/v1.0.0";
+const RELEASE_URL = "https://github.com/1nfys/atlifm/releases/tag/v1.0.1";
 
 const features = [
   {
@@ -31,17 +32,37 @@ const features = [
   {
     title: "multi-engine preview",
     kind: "preview",
-    text: "image and SVG viewer with zoom and pan, code viewer with syntax highlighting, directory tree and a 16-byte hex dump.",
+    text: "image and SVG zoom/pan, syntax highlighted code, directory tree, 16-byte hex dump, video thumbnails and scrollable PDF pages.",
+  },
+  {
+    title: "search & quick jumps",
+    kind: "search",
+    text: "fd name search, rg content search, fuzzy current-folder palette and zoxide directory jumps with native fallback.",
+  },
+  {
+    title: "network places",
+    kind: "network",
+    text: "sftp, smb, ftp, ftps, bare IP and Windows UNC shares with an in-window connection form, libsecret passwords and managed SSH keys.",
   },
   {
     title: "interactive archives",
     kind: "archive",
-    text: "browse zip, tar.gz, 7z and rar hierarchies inside the preview, open internal files or drag them out without extraction.",
+    text: "browse zip, tar.gz, 7z and rar in the preview pane, rubberband box select entries, drag out to any app without full extraction.",
+  },
+  {
+    title: "bulk operations",
+    kind: "bulk",
+    text: "F2 opens the live bulk rename overlay, Ctrl+Shift+A creates files/folders in batch, with trash management and permanent deletion.",
   },
   {
     title: "properties & disk usage",
     kind: "inspector",
     text: "Alt+Enter opens a compact inspector with permissions. drive roots get a disk usage console with progress bars.",
+  },
+  {
+    title: "background tasks",
+    kind: "tasks",
+    text: "copy, move, delete and archives run in the background with transfer speed, ETA and logs. Alt+W opens the tasks overlay.",
   },
   {
     title: "xdg desktop portal",
@@ -64,6 +85,11 @@ const features = [
     text: "F1 opens the keyboard overlay. click a key and press a new combination: bindings apply live and persist.",
   },
   {
+    title: "layout persistence",
+    kind: "layout",
+    text: "Ctrl+Shift+S persists column widths, panel toggles and window size to layout.ini. Tiling WMs keep their tile geometry.",
+  },
+  {
     title: "strict visual style",
     kind: "theme",
     text: "flat zero-radius panels, monospace JetBrains Mono and a fully recolorable palette through theme.conf.",
@@ -75,10 +101,10 @@ const installs = {
     label: "arch linux",
     channel: "pacman",
     note: "x86_64 package from the release page. for other architectures build the PKGBUILD.",
-    commands: ["sudo pacman -U atlifm-1.0.0-1-x86_64.pkg.tar.zst"],
+    commands: ["sudo pacman -U atlifm-1.0.1-1-x86_64.pkg.tar.zst"],
     download: {
       label: "pkg.tar.zst",
-      href: `${RELEASES_URL}/download/atlifm-1.0.0-1-x86_64.pkg.tar.zst`,
+      href: `${RELEASES_URL}/download/atlifm-1.0.1-1-x86_64.pkg.tar.zst`,
     },
   },
   fedora: {
@@ -88,7 +114,7 @@ const installs = {
     commands: ["sudo dnf copr enable 1nfys/atlifm", "sudo dnf install atlifm"],
     download: {
       label: "rpm",
-      href: `${RELEASES_URL}/download/atlifm-1.0.0-1.fc44.x86_64.rpm`,
+      href: `${RELEASES_URL}/download/atlifm-1.0.1-1.fc44.x86_64.rpm`,
     },
   },
   opensuse: {
@@ -115,17 +141,17 @@ const installs = {
     ],
     download: {
       label: ".deb",
-      href: `${RELEASES_URL}/download/atlifm_1.0.0-1_amd64.deb`,
+      href: `${RELEASES_URL}/download/atlifm_1.0.1-1_amd64.deb`,
     },
   },
   debian: {
     label: "debian",
     channel: "apt",
     note: "standalone package, x86_64 shown. an arm64 build is available on the release page.",
-    commands: ["sudo apt install ./atlifm_1.0.0-1_amd64.deb"],
+    commands: ["sudo apt install ./atlifm_1.0.1-1_amd64.deb"],
     download: {
       label: ".deb",
-      href: `${RELEASES_URL}/download/atlifm_1.0.0-1_amd64.deb`,
+      href: `${RELEASES_URL}/download/atlifm_1.0.1-1_amd64.deb`,
     },
   },
   obs: {
@@ -146,20 +172,20 @@ const installs = {
     label: "alpine",
     channel: "apk",
     note: "x86_64 package, aarch64 is attached to the same release.",
-    commands: ["sudo apk add --allow-untrusted ./atlifm-1.0.0-r0-x86_64.apk"],
+    commands: ["sudo apk add --allow-untrusted ./atlifm-1.0.1-r0-x86_64.apk"],
     download: {
       label: ".apk",
-      href: `${RELEASES_URL}/download/atlifm-1.0.0-r0-x86_64.apk`,
+      href: `${RELEASES_URL}/download/atlifm-1.0.1-r0-x86_64.apk`,
     },
   },
   appimage: {
     label: "appimage",
     channel: "portable",
     note: "self-contained bundle, no installation into the system.",
-    commands: ["chmod +x atlifm-1.0.0-x86_64.AppImage", "./atlifm-1.0.0-x86_64.AppImage"],
+    commands: ["chmod +x atlifm-1.0.1-x86_64.AppImage", "./atlifm-1.0.1-x86_64.AppImage"],
     download: {
       label: "appimage",
-      href: `${RELEASES_URL}/download/atlifm-1.0.0-x86_64.AppImage`,
+      href: `${RELEASES_URL}/download/atlifm-1.0.1-x86_64.AppImage`,
     },
   },
   source: {
@@ -224,7 +250,7 @@ export default function Landing() {
         <div className="rail-head rail-head-spaced">release</div>
         <a className="rail-item" href={RELEASES_URL} target="_blank" rel="noreferrer">
           <span className="rail-mark" />
-          v1.0.0
+          v1.0.1
           <span className="rail-meta">↗</span>
         </a>
         <a className="rail-item" href={REPO_URL} target="_blank" rel="noreferrer">
@@ -250,50 +276,63 @@ export default function Landing() {
 
       <div className="home-main">
         <section className="hero" id="overview">
-          <div className="hero-meta">
-            <span className="chip chip-accent">v1.0.0</span>
-            <span className="chip">linux</span>
-            <span className="chip">wayland · x11</span>
-            <span className="chip">c++23 · qt6</span>
-            <span className="chip">mit</span>
-          </div>
-          <h1 className="hero-title">
-            atlifm<span className="hero-cursor">_</span>
-          </h1>
-          <p className="hero-sub">
-            terminal style file manager with human friendly features. Miller columns, tabs, interactive archives, drag
-            and drop to any app and a built-in XDG desktop portal.
-          </p>
-          <div className="hero-actions">
-            <a className="btn btn-primary" href={RELEASES_URL} target="_blank" rel="noreferrer">
-              download v1.0.0
-            </a>
-            <Link className="btn" to="/docs/welcome">
-              documentation
-            </Link>
-            <a className="btn btn-ghost" href={REPO_URL} target="_blank" rel="noreferrer">
-              github ↗
-            </a>
-          </div>
-          <div className="hero-facts">
-            <div>
-              <span className="fact-key">platform</span>
-              <span className="fact-value">x86_64 · aarch64</span>
+          <div className="hero-split">
+            <div className="hero-content">
+              <div className="hero-kicker">
+                <span className="accent">v1.0.1</span>
+                <span className="sep">/</span>
+                <span>linux</span>
+                <span className="sep">/</span>
+                <span>wayland &amp; x11</span>
+                <span className="sep">/</span>
+                <span>c++23 &amp; qt6</span>
+                <span className="sep">/</span>
+                <span>mit</span>
+              </div>
+              <h1 className="hero-title">
+                atlifm<span className="hero-cursor">_</span>
+              </h1>
+              <p className="hero-sub">
+                terminal style file manager with human friendly features. Miller columns, tabs, interactive archives, drag
+                and drop to any app and a built-in XDG desktop portal.
+              </p>
+              <div className="hero-actions">
+                <a className="btn btn-primary" href={RELEASES_URL} target="_blank" rel="noreferrer">
+                  download v1.0.1
+                </a>
+                <Link className="btn" to="/docs/welcome">
+                  documentation
+                </Link>
+                <a className="btn btn-ghost" href={REPO_URL} target="_blank" rel="noreferrer">
+                  github ↗
+                </a>
+              </div>
+              <div className="hero-facts">
+                <div>
+                  <span className="fact-key">platform</span>
+                  <span className="fact-value">x86_64 · aarch64</span>
+                </div>
+                <div>
+                  <span className="fact-key">packages</span>
+                  <span className="fact-value">deb · rpm · pkg.tar.zst · apk · appimage</span>
+                </div>
+                <div>
+                  <span className="fact-key">license</span>
+                  <span className="fact-value">MIT</span>
+                </div>
+              </div>
             </div>
-            <div>
-              <span className="fact-key">packages</span>
-              <span className="fact-value">deb · rpm · pkg.tar.zst · apk · appimage</span>
-            </div>
-            <div>
-              <span className="fact-key">license</span>
-              <span className="fact-value">MIT</span>
+
+            <div className="hero-visual">
+              <LogoDots />
             </div>
           </div>
 
           <figure className="shot-figure hero-shot">
             <img src={mainShot} alt="atlifm main window with miller columns, tabs and preview" />
             <figcaption>
-              <span>main window</span>
+              <span>main window · miller columns, tabs and multi-engine preview</span>
+              <span className="caption-meta">atlifm v1.0.1</span>
             </figcaption>
           </figure>
         </section>
@@ -401,7 +440,7 @@ export default function Landing() {
             <figure className="shot-figure">
               <img src={chooserShot} alt="atlifm xdg portal file chooser dialog" />
               <figcaption>
-                <span>file chooser</span>
+                <span>file chooser portal dialog · instant preview and keyboard filter</span>
                 <span className="caption-meta">xdg portal backend</span>
               </figcaption>
             </figure>

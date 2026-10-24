@@ -1,6 +1,6 @@
 # Plugin Developer Guide
 
-atlifm includes a modular plugin engine that lets users and developers add external commands, file analyzers, and workflow automation without modifying or recompiling the core application. Plugins come in two flavors: declarative `.conf` files and scripts executed as child processes, and native C++ shared libraries loaded in-process through a stable C ABI.
+atlifm includes a modular plugin engine that lets users and developers add external commands, file analyzers, and workflow automation without modifying or recompiling the core application. Plugins come in two flavors: declarative `.conf` files and scripts executed as child processes, and native C++ shared libraries loaded in-process through a stable C abi.
 
 ***
 
@@ -13,7 +13,7 @@ Plugins are plain-text files located in `~/.config/atlifm/plugins/`:
 * **Dynamic discovery**: atlifm scans and loads plugins on startup; plugins can be added, edited, or removed without rebuilding.
 * **Directory override**: set the `ATLIFM_CONFIG_DIR` environment variable to redirect all configuration lookups, which is useful for testing with an isolated profile.
 * **Conflicts**: when a script and a `.conf` file share the same base name, the `.conf` definition wins and the script is ignored. A same-named `.conf` or script also takes over the menu entry of a native `.so` plugin, although the plugin still services its overrides, previews, and hooks.
-* **C++ plugins**: a compiled `*.so` in the same directory exporting `atlifm_plugin_init` is loaded in-process through a stable C ABI; see section 10.
+* **C++ plugins**: a compiled `*.so` in the same directory exporting `atlifm_plugin_init` is loaded in-process through a stable C abi; see section 10.
 
 Plugin integration points:
 
@@ -22,7 +22,7 @@ Plugin integration points:
 * Action engine: custom actions are bindable in `keybinds.conf`, and built-in operations can be intercepted via overrides.
 * Preview pane: preview plugins can replace the built-in preview for matching files.
 * Event hooks: background commands triggered by application events.
-* Native host: compiled plugins register actions, overrides, previews, and hooks through the in-process host API and share the same menus and dispatcher.
+* Native host: compiled plugins register actions, overrides, previews, and hooks through the in-process host api and share the same menus and dispatcher.
 
 When a plugin configuration contains invalid values, the offending entries are skipped and the reasons are recorded in the plugin's `rejected` list, which is shown as a tooltip in the `Plugins` submenu.
 
@@ -37,7 +37,7 @@ When a plugin configuration contains invalid values, the offending entries are s
 | `Type`        | String  | Optional. Set to `preview` to turn the plugin into a preview plugin.                                                    |
 | `Extensions`  | List    | Optional. Comma-separated file extensions (`cpp, .HPP` is normalized to `.cpp, .hpp`). If omitted, every file matches. Plugins with extensions never match directories. |
 | `AppliesTo`   | String  | Target filter: `files`, `dirs`, or `any` (default: `any`).                                                              |
-| `Detach`      | Boolean | `true`, `1`, or `yes` launches the process detached in the background (suitable for GUI apps); `false` captures output into the terminal output overlay. |
+| `Detach`      | Boolean | `true`, `1`, or `yes` launches the process detached in the background (suitable for gui apps); `false` captures output into the terminal output overlay. |
 | `Description` | String  | Tooltip description for the plugin entry.                                                                               |
 | `Action`      | String  | Registers a custom action ID that can be bound to keys in `keybinds.conf`.                                              |
 | `Keys`        | String  | Default keyboard shortcut for the action (for example, `Ctrl+Alt+V`). Users may rebind or disable it like any built-in action. |
@@ -88,7 +88,7 @@ The child process starts with `ATLIFM_DIR` as its working directory, and atlifm 
 
 ### Terminal Output Overlay
 
-When `Detach = false`, the process runs with merged `stdout` and `stderr`. Its output streams in real time into the TUI overlay positioned in the bottom-right corner of the window:
+When `Detach = false`, the process runs with merged `stdout` and `stderr`. Its output streams in real time into the tui overlay positioned in the bottom-right corner of the window:
 
 * The title shows `▸ name: running…` and switches to `done` or `failed (exit N)` when the process finishes.
 * Output chunks are buffered so UTF-8 characters and lines are never split mid-sequence (up to 5000 blocks are kept).
@@ -162,7 +162,7 @@ CommandPlaceholder = pattern
 
 ### Multi-Pane Window Output (`@@pane:N`)
 
-While ordinary actions stream output into a compact bottom-right corner overlay, command plugins open a full-height **three-pane TUI overlay** spanning the Miller columns (parent, center, preview):
+While ordinary actions stream output into a compact bottom-right corner overlay, command plugins open a full-height **three-pane tui overlay** spanning the Miller columns (parent, center, preview):
 
 * **External Plugins & Scripts**: Send lines beginning with markers to route output into specific columns:
   * `@@pane:0` directs subsequent text into the left pane (parent column).
@@ -240,9 +240,9 @@ Its output appears in the overlay when the script is launched from the `Plugins`
 
 ***
 
-## 10. Native C++ Plugins (ABI v1)
+## 10. Native C++ Plugins (abi v1)
 
-Native plugins are shared libraries (`*.so`) placed in the plugins directory and loaded in-process. They use a stable C ABI declared in `atlifm-core/atlifm-plugin-api.h` and participate in the same menus, keybindings, override dispatcher, preview pane, and hook system as `.conf` plugins.
+Native plugins are shared libraries (`*.so`) placed in the plugins directory and loaded in-process. They use a stable C abi declared in `atlifm-core/atlifm-plugin-api.h` and participate in the same menus, keybindings, override dispatcher, preview pane, and hook system as `.conf` plugins.
 
 ### Building and Installing
 
@@ -259,7 +259,7 @@ A complete example lives in `examples/hello-plugin/hello-plugin.cpp`. The librar
 | `int atlifm_plugin_init(const AtlifmHostApi*)` | Yes      | Registers the plugin's capabilities. Return `0` on success; any non-zero value aborts loading. |
 | `void atlifm_plugin_shutdown(void)`            | No       | Called right before the library is unloaded at application exit.                              |
 
-Always validate the ABI before registering:
+Always validate the abi before registering:
 
 ```c++
 extern "C" int atlifm_plugin_init(const AtlifmHostApi* api) {
@@ -270,7 +270,7 @@ extern "C" int atlifm_plugin_init(const AtlifmHostApi* api) {
 
 Registrations are only accepted while `atlifm_plugin_init` runs; the host copies every descriptor and owns the registries afterwards.
 
-### Host API
+### Host api
 
 | Function                                       | Description                                                                                                                       |
 | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
@@ -357,18 +357,18 @@ static void render(const char* path, AtlifmWriteFn write, void* write_user, void
 api->register_preview(".hello", render, user);
 ```
 
-`render` runs in a worker thread: only call `write()` from it and never touch the UI or other host functions. Empty output falls back to the built-in preview.
+`render` runs in a worker thread: only call `write()` from it and never touch the ui or other host functions. Empty output falls back to the built-in preview.
 
 ### Hooks
 
-`register_hook("on_start" | "on_navigate" | "on_select", fn, user)` subscribes to the same events as `.conf` hooks. Hooks run in the GUI thread, share the invocation context, and have no output overlay.
+`register_hook("on_start" | "on_navigate" | "on_select", fn, user)` subscribes to the same events as `.conf` hooks. Hooks run in the gui thread, share the invocation context, and have no output overlay.
 
 ### Protection, Precedence, and Failure Handling
 
 * IDs containing `sudo` (case-insensitive) are rejected for actions and overrides; sudo, polkit, and portal flows never reach the dispatcher.
 * A `.conf` or script plugin with the same base name takes over the `Plugins` menu entry, but the plugin keeps servicing its overrides, previews, and hooks.
-* A library that fails to load (missing symbol, ABI mismatch, non-zero `atlifm_plugin_init`) is skipped, its registrations are rolled back, and the reason is written to the atlifm log.
-* All callbacks except the preview `render` run in the GUI thread, keep them fast and delegate heavy work to `run_command`.
+* A library that fails to load (missing symbol, abi mismatch, non-zero `atlifm_plugin_init`) is skipped, its registrations are rolled back, and the reason is written to the atlifm log.
+* All callbacks except the preview `render` run in the gui thread, keep them fast and delegate heavy work to `run_command`.
 
 ***
 
@@ -376,12 +376,12 @@ api->register_preview(".hello", render, user);
 
 ### Example A: Code Editor Launcher
 
-Launch VS Code on selected files or folders without capturing output:
+Launch vs Code on selected files or folders without capturing output:
 
 `~/.config/atlifm/plugins/vscode.conf`
 
 ```ini
-Name = Open in VS Code
+Name = Open in vs Code
 Exec = code
 AppliesTo = any
 Detach = true
@@ -476,7 +476,7 @@ Hook = on_navigate
 
 * Invalid `Action` or `Override` values never fail silently: hover the plugin entry in the `Plugins` submenu to see the rejection reason.
 * Use `ATLIFM_CONFIG_DIR` for an isolated test profile: `ATLIFM_CONFIG_DIR=/tmp/atlifm-test atlifm`.
-* Prefer absolute paths for GUI launchers so the command resolves regardless of `PATH`.
+* Prefer absolute paths for gui launchers so the command resolves regardless of `PATH`.
 * Detached plugins never block the interface, and streaming plugins keep atlifm fully responsive while the overlay fills.
 * Preview plugins should print plain text; ANSI color sequences are shown literally since the preview page is a plain text viewer.
-* plugins: verify your compiler flags (`-shared -fPIC`) and the ABI check; a non-zero return from `atlifm_plugin_init` quietly skips the library. Keep action IDs unique and remember that preview `render` runs off the GUI thread.
+* plugins: verify your compiler flags (`-shared -fPIC`) and the abi check; a non-zero return from `atlifm_plugin_init` quietly skips the library. Keep action IDs unique and remember that preview `render` runs off the gui thread.

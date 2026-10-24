@@ -23,13 +23,13 @@ Existing files are never overwritten, and a deleted `example.conf` is not recrea
 | Path | Purpose |
 | :--- | :--- |
 | `~/.config/atlifm/keybinds.conf` | Keyboard action bindings |
-| `~/.config/atlifm/theme.conf` | Palette, UI component colors, window size, fonts, layout toggles, and search settings |
+| `~/.config/atlifm/theme.conf` | Palette, ui component colors, window size, fonts, layout toggles, and search settings |
 | `~/.config/atlifm/layout.ini` | Saved column and sidebar widths, panel visibility, and window dimensions (`Ctrl+Shift+S`) |
 | `~/.config/atlifm/plugins/` | Plugin definitions (`.conf`), script plugins (`*.sh`, `*.py`, `*.bash`), and native C++ plugins (`*.so`) |
 | `~/.config/atlifm/sorting.ini` | Per-directory sort mode and direction (managed automatically) |
-| `~/.config/atlifm/ssh_keys.ini` | Remembered SFTP private key file paths per host/port/user (`chmod 600`) |
+| `~/.config/atlifm/ssh_keys.ini` | Remembered sftp private key file paths per host/port/user (`chmod 600`) |
 | `~/.cache/atlifm/undo_backups/` | Backup storage used by undo and redo operations |
-| `~/.cache/atlifm/thumbnails/` | Disk LRU cache for generated image, video, and PDF thumbnails |
+| `~/.cache/atlifm/thumbnails/` | Disk lru cache for generated image, video, and pdf thumbnails |
 
 ***
 
@@ -67,8 +67,8 @@ Flat `key = value` format. Lines starting with `#` are comments; unknown keys ar
 | `window_width` | `1200` | Initial window width in pixels (accepted range 400 to 7680). Alias: `default_width`. |
 | `window_height` | `750` | Initial window height in pixels (accepted range 300 to 4320). Alias: `default_height`. |
 | `sidebar_width` | `180` | Bookmarks sidebar width in pixels (accepted range 80 to 800). |
-| `font_family` | auto | Font family. Auto-detection order: JetBrainsMono Nerd Font, JetBrainsMono NF, DejaVu Sans Mono. |
-| `font_size` | `13` | Font size in pixels (accepted range 8 to 48). Scales UI text as well as directly painted rows and tabs. |
+| `font_family` | auto | Font family. Auto-detection order: JetBrainsMono Nerd Font, JetBrainsMono nf, DejaVu Sans Mono. |
+| `font_size` | `13` | Font size in pixels (accepted range 8 to 48). Scales ui text as well as directly painted rows and tabs. |
 | `show_tabs` | `true` | Show or hide the top tab bar. |
 | `show_bookmarks` | `true` | Show or hide the left bookmarks sidebar. |
 | `show_status_bar` | `true` | Show or hide the bottom status bar. |
@@ -122,7 +122,7 @@ The `dark` flag and the base palette define the overall look:
 | `peach` | `#c68e6b` | Semantic accent |
 | `teal` | `#6bbcc6` | Semantic accent |
 
-### UI Components
+### ui Components
 
 Every key below is optional. When it is missing, the value is inherited from the palette or from a parent role:
 
@@ -174,7 +174,7 @@ Every key below is optional. When it is missing, the value is inherited from the
 
 ## 4. plugins/
 
-Plugin definitions live in `~/.config/atlifm/plugins/`. Each `.conf` file defines one plugin, executable `*.sh`, `*.py`, and `*.bash` files are registered as script plugins automatically, and compiled `*.so` libraries are loaded in-process as native C++ plugins (ABI v1).
+Plugin definitions live in `~/.config/atlifm/plugins/`. Each `.conf` file defines one plugin, executable `*.sh`, `*.py`, and `*.bash` files are registered as script plugins automatically, and compiled `*.so` libraries are loaded in-process as native C++ plugins (abi v1).
 
 | Key | Required | Purpose |
 | :--- | :--- | :--- |
@@ -235,8 +235,8 @@ atlifm integrates smoothly with popular Linux command-line tools:
 | `rg` (ripgrep) | Content search (`Ctrl+Shift+D`) | High performance regex search; falls back to `grep -E`. |
 | `zoxide` | Quick jump (`Ctrl+Shift+G`) | Directory frecency tracker; falls back to bookmarks. |
 | `ffmpegthumbnailer` / `ffmpeg` | Video preview | Generates frame thumbnails for video files in preview pane. |
-| `poppler-utils` (`pdftoppm`) | PDF preview | Renders scrollable PDF pages for preview (`J` / `K` keys). |
-| `gvfs`, `gvfs-fuse`, `gvfs-smb` | Remote shares | Mounts `sftp://`, `smb://`, and `ftp://` network places under FUSE. |
+| `poppler-utils` (`pdftoppm`) | pdf preview | Renders scrollable pdf pages for preview (`J` / `K` keys). |
+| `gvfs`, `gvfs-fuse`, `gvfs-smb` | Remote shares | Mounts `sftp://`, `smb://`, and `ftp://` network places under fuse. |
 
 
 ***
@@ -248,8 +248,8 @@ atlifm integrates smoothly with popular Linux command-line tools:
 | `atlifm [directory]` | Open atlifm at the given directory (defaults to current directory / home). |
 | `atlifm --setdefault` | install and configure atlifm as the default file manager and filechooser portal backend. |
 | `atlifm --setup-file-manager` | install atlifm as the default file manager for the current user. |
-| `atlifm --setup-portal` | Install and configure atlifm as the default XDG FileChooser portal backend. |
+| `atlifm --setup-portal` | Install and configure atlifm as the default xdg FileChooser portal backend. |
 | `atlifm --file-manager` | run as the org.freedesktop.filemanager1 dbus service. |
 | `atlifm --properties <path>` | open the properties panel for the given path. |
-| `atlifm --portal` | Run as the XDG desktop portal FileChooser backend (D-Bus activatable). |
+| `atlifm --portal` | Run as the xdg desktop portal FileChooser backend (D-Bus activatable). |
 | `atlifm --help`, `atlifm --version` | Print usage or version information. |

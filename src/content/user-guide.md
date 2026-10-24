@@ -6,9 +6,9 @@ Comprehensive documentation for installing, configuring, and daily usage of atli
 
 ## 1. System Requirements & Dependencies
 
-atlifm requires a Linux distribution with Qt 6.5 or newer. A monospace Nerd Font (such as JetBrainsMono Nerd Font) is recommended; if none is installed, atlifm falls back to DejaVu Sans Mono.
+atlifm requires a Linux distribution with qt 6.5 or newer. A monospace Nerd Font (such as JetBrainsMono Nerd Font) is recommended; if none is installed, atlifm falls back to DejaVu Sans Mono.
 
-Prebuilt packages for Arch Linux, Debian/Ubuntu, Fedora/RHEL, openSUSE Tumbleweed, Alpine, and the self-contained AppImage are listed on the [Downloads](/docs/downloads) page. The dependencies below are only needed when building from source.
+Prebuilt packages for Arch Linux, Debian/Ubuntu, Fedora/rhel, openSUSE Tumbleweed, Alpine, and the self-contained appimage are listed on the [Downloads](/docs/downloads) page. The dependencies below are only needed when building from source.
 
 ### Arch Linux / Manjaro
 
@@ -16,7 +16,7 @@ Prebuilt packages for Arch Linux, Debian/Ubuntu, Fedora/RHEL, openSUSE Tumblewee
 sudo pacman -S base-devel gcc cmake ninja qt6-base qt6-svg
 ```
 
-### Fedora / RHEL
+### Fedora / rhel
 
 ```bash
 sudo dnf install gcc-c++ cmake ninja-build qt6-qtbase-devel qt6-qtsvg-devel
@@ -36,7 +36,7 @@ sudo apt install build-essential cmake ninja-build qt6-base-dev qt6-base-private
 
 ### Optional External Tools
 
-atlifm functions fully out of the box without any external CLI tools, but seamlessly detects and leverages the following optional utilities for maximum speed and rich media preview:
+atlifm functions fully out of the box without any external cli tools, but seamlessly detects and leverages the following optional utilities for maximum speed and rich media preview:
 
 | Tool | Used For | Fallback When Missing |
 | :--- | :--- | :--- |
@@ -44,7 +44,7 @@ atlifm functions fully out of the box without any external CLI tools, but seamle
 | `rg` (ripgrep) | Lightning-fast text search inside files (`Ctrl+Shift+D`) | `grep -E` |
 | `zoxide` | Frecent directory jumping (`Ctrl+Shift+G`) | Bookmarks jump menu |
 | `ffmpegthumbnailer` or `ffmpeg` | Video thumbnail extraction in the preview pane | Generic video icon |
-| `poppler-utils` (`pdftoppm`, `pdfinfo`) | Multi-page PDF preview rendering | Plain file details |
+| `poppler-utils` (`pdftoppm`, `pdfinfo`) | Multi-page pdf preview rendering | Plain file details |
 | `gvfs`, `gvfs-fuse`, `gvfs-smb` | Remote shares (`sftp://`, `smb://`, `ftp://`) | Remote network connections disabled |
 
 
@@ -69,7 +69,7 @@ update-desktop-database ~/.local/share/applications
 atlifm --setup-portal
 ```
 
-The binary accepts a directory as an optional argument (`atlifm ~/Downloads`) and serves as the XDG portal backend when launched with `--portal`.
+The binary accepts a directory as an optional argument (`atlifm ~/Downloads`) and serves as the xdg portal backend when launched with `--portal`.
 
 ***
 
@@ -87,7 +87,7 @@ Some physical controls are handled directly by the widgets:
 | `Enter`, double click, or `Right` | Open focused file or enter folder |
 | `Left` / `Backspace` | Navigate to parent folder |
 | `Space` | Toggle selection on focused item and advance cursor to next item |
-| `J` / `K` | Scroll PDF pages up / down when preview pane has focus |
+| `J` / `K` | Scroll pdf pages up / down when preview pane has focus |
 | Mouse wheel on tab bar | Scroll through open tabs |
 | Middle click on a tab | Close that tab |
 | Single click | Focus item (files open strictly on double-click) |
@@ -121,7 +121,7 @@ Some physical controls are handled directly by the widgets:
 | `toggle_bookmarks` | `Ctrl+B`, `Ctrl+\`, `F9` | Toggle bookmarks sidebar |
 | `toggle_hidden` | `Ctrl+H`, `Ctrl+.` | Show / hide hidden files and dotfiles |
 | `refresh` | `Ctrl+R`, `F5` | Reload directory contents |
-| `tasks` | `Alt+W` | Background tasks overlay (progress, speed, ETA, logs) |
+| `tasks` | `Alt+W` | Background tasks overlay (progress, speed, eta, logs) |
 | `sort_name` | `Alt+1` | Sort items by Name |
 | `sort_size` | `Alt+2` | Sort items by Size |
 | `sort_date` | `Alt+3` | Sort items by Modification Date |
@@ -181,27 +181,27 @@ Paste a network address directly into the address bar (`Ctrl+L` or `Alt+D`) and 
 
 | Address Format | Protocol | Default Port |
 | :--- | :--- | :--- |
-| `ftp://server/path` | Plain FTP | `21` |
-| `ftps://server/path` | FTP over explicit TLS | `21` |
-| `ftpis://server/path` | FTP over implicit TLS | `990` |
-| `sftp://user@server/path` | SFTP (SSH File Transfer Protocol) | `22` |
-| `smb://server/share/path` | SMB / Windows network share | `445` |
-| `\\server\share\folder` | Windows-style UNC path | `445` |
-| `192.168.1.10` or `192.168.1.10:22` | SFTP by default, protocol selectable in form | `22` |
-| `user@server:2222` | SFTP with custom port | `2222` |
+| `ftp://server/path` | Plain ftp | `21` |
+| `ftps://server/path` | ftp over explicit tls | `21` |
+| `ftpis://server/path` | ftp over implicit tls | `990` |
+| `sftp://user@server/path` | sftp (ssh File Transfer Protocol) | `22` |
+| `smb://server/share/path` | smb / Windows network share | `445` |
+| `\\server\share\folder` | Windows-style unc path | `445` |
+| `192.168.1.10` or `192.168.1.10:22` | sftp by default, protocol selectable in form | `22` |
+| `user@server:2222` | sftp with custom port | `2222` |
 
-The connection form provides input fields for protocol, host or IP, port, remote path, username, password, SSH private key path (SFTP), domain (SMB), anonymous/guest login, and **Remember password**. Passwords are never written to plaintext configuration files: checking **Remember password** safely saves the credential in your system keyring via `libsecret`.
+The connection form provides input fields for protocol, host or ip, port, remote path, username, password, ssh private key path (sftp), domain (smb), anonymous/guest login, and **Remember password**. Passwords are never written to plaintext configuration files: checking **Remember password** safely saves the credential in your system keyring via `libsecret`.
 
-For SFTP connections:
-* The optional **SSH key** field accepts a private key path (`~` is expanded) or opens a file picker with `...`.
+For sftp connections:
+* The optional **ssh key** field accepts a private key path (`~` is expanded) or opens a file picker with `...`.
 * The password field becomes the key passphrase hint and can be remembered like a normal password.
 * Atlifm does not duplicate private keys: it inserts a managed `Include` directive in `~/.ssh/config` and maintains per-host `IdentityFile` entries under `~/.ssh/atlifm/*.conf`.
 * Remembered key paths (not passphrases or key contents) are tracked in `~/.config/atlifm/ssh_keys.ini` with owner-only (`0600`) permissions.
-* The **Accept unknown SSH host key** checkbox allows trusting new host fingerprints on first connection.
+* The **Accept unknown ssh host key** checkbox allows trusting new host fingerprints on first connection.
 
-Once mounted, navigation continues transparently through the GVfs FUSE path under `/run/user/<uid>/gvfs/`.
+Once mounted, navigation continues transparently through the gvfs fuse path under `/run/user/<uid>/gvfs/`.
 
-*Public SFTP Test Server*: Connect to `sftp://demo@test.rebex.net/` (user `demo`, password `password`, port `22`, enable **Accept unknown SSH host key**) for an instant sanity check.
+*Public sftp Test Server*: Connect to `sftp://demo@test.rebex.net/` (user `demo`, password `password`, port `22`, enable **Accept unknown ssh host key**) for an instant sanity check.
 
 ### Interactive In-Place Archives
 
@@ -234,7 +234,7 @@ In any search overlay, `Up` / `Down` navigates the focus without modifying your 
 File operations—copying, moving, trashing, permanent deletion, and archive packing/unpacking—run asynchronously in dedicated background thread pools (`io` and `thumb`).
 
 * The status bar displays real-time aggregate transfer progress and speed.
-* Press `Alt+W` to open the tasks overlay. Each task shows its progress bar, speed in MB/s, estimated time of arrival (ETA), and current file.
+* Press `Alt+W` to open the tasks overlay. Each task shows its progress bar, speed in MB/s, estimated time of arrival (eta), and current file.
 * Press `Del` to cancel a running task cleanly. If you cancel a copy or move operation, atlifm initiates an automatic rollback of partially transferred files.
 * Press `Enter` to inspect the complete log output for a specific task.
 
@@ -271,9 +271,9 @@ Custom plugin actions appear in the same overlay under the `PLUGINS` section as 
 
 ***
 
-## 6. XDG Desktop Portal Setup
+## 6. xdg Desktop Portal Setup
 
-atlifm provides an integrated XDG Desktop Portal FileChooser backend. When enabled, desktop browsers (Chromium, Firefox, Zen, Brave) and GTK/Qt applications automatically use atlifm for Open File and Save File dialogs.
+atlifm provides an integrated xdg Desktop Portal FileChooser backend. When enabled, desktop browsers (Chromium, Firefox, Zen, Brave) and gtk/qt applications automatically use atlifm for Open File and Save File dialogs.
 
 To configure atlifm as your default file manager and file picker:
 
@@ -322,8 +322,8 @@ Themes are stored in `~/.config/atlifm/theme.conf`. The syntax uses simple `key 
 | `window_width` | `1200` | Initial window width in pixels (accepted range 400 to 7680). Alias: `default_width`. |
 | `window_height` | `750` | Initial window height in pixels (accepted range 300 to 4320). Alias: `default_height`. |
 | `sidebar_width` | `180` | Bookmarks sidebar width in pixels (accepted range 80 to 800). |
-| `font_family` | auto | Font family. Auto-detection order: JetBrainsMono Nerd Font, JetBrainsMono NF, DejaVu Sans Mono. |
-| `font_size` | `13` | Font size in pixels (accepted range 8 to 48); scales UI text as well as directly painted rows and tabs. |
+| `font_family` | auto | Font family. Auto-detection order: JetBrainsMono Nerd Font, JetBrainsMono nf, DejaVu Sans Mono. |
+| `font_size` | `13` | Font size in pixels (accepted range 8 to 48); scales ui text as well as directly painted rows and tabs. |
 | `show_tabs` | `true` | Show or hide the top tab bar. |
 | `show_bookmarks` | `true` | Show or hide the left bookmarks sidebar. |
 | `show_status_bar` | `true` | Show or hide the bottom status bar. |
@@ -386,13 +386,13 @@ show_preview = true
 preview_width = 450
 ```
 
-Individual UI components (borders, tabs, menus, inputs, buttons, scrollbars, overlays, and badges) can be recolored with dedicated keys. See the [Configuration Reference](/docs/configuration-reference) page for the complete key table.
+Individual ui components (borders, tabs, menus, inputs, buttons, scrollbars, overlays, and badges) can be recolored with dedicated keys. See the [Configuration Reference](/docs/configuration-reference) page for the complete key table.
 
 ***
 
 ## 8. Plugins
 
-Extend atlifm with external commands from `~/.config/atlifm/plugins/`. Each `.conf` file defines one plugin; executable `*.sh`, `*.py`, and `*.bash` files in the same directory are picked up as script plugins automatically. Compiled C++ plugins (`*.so`) loaded in-process through a stable ABI (v1) are supported as well.
+Extend atlifm with external commands from `~/.config/atlifm/plugins/`. Each `.conf` file defines one plugin; executable `*.sh`, `*.py`, and `*.bash` files in the same directory are picked up as script plugins automatically. Compiled C++ plugins (`*.so`) loaded in-process through a stable abi (v1) are supported as well.
 
 Key capabilities:
 
@@ -400,6 +400,6 @@ Key capabilities:
 * **Overrides**: intercept nearly every built-in operation, keyboard actions, context menus, mouse paths, tab bar, bookmarks panel, with your own command; sudo, polkit, and portal flows are excluded.
 * **Preview plugins**: replace the built-in preview pane for matching file types with your own command output.
 * **Event hooks**: run commands in the background on `on_start`, `on_navigate`, and `on_select` events.
-* **C++ plugins**: shared libraries that register actions, overrides, previews, and hooks through an in-process C ABI.
+* **C++ plugins**: shared libraries that register actions, overrides, previews, and hooks through an in-process C abi.
 
-The [Plugin Developer Guide](/docs/plugin-developer-guide) covers the full configuration format, environment variables, validation rules, the native C++ ABI, and practical examples.
+The [Plugin Developer Guide](/docs/plugin-developer-guide) covers the full configuration format, environment variables, validation rules, the native C++ abi, and practical examples.

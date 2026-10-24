@@ -36,7 +36,7 @@ atlifm bridges this gap. It preserves the strict monospace, border-aligned, zero
 * **Full undo and redo**: a complete transaction history for file operations with `Ctrl+Z` and `Ctrl+Y` / `Ctrl+Shift+Z`. Pressing `Ctrl+Z` while a copy or move is still running cancels it with rollback.
 * **Extensible plugin system**: custom actions, rebindable shortcuts, overrides of nearly every built-in operation, preview plugins, event hooks, automatically discovered shell scripts, and native C++ plugins (ABI v1).
 * **Customizable layout and persistence**: window size on floating WMs, sidebar and column widths, optional panel toggles (`show_tabs`, `show_bookmarks`, `show_status_bar`, `show_parent_column`, `show_preview`), font family, and font size via `theme.conf`. `Ctrl+Shift+S` persists the layout to `layout.ini`, while `Ctrl+Shift+R` resets it to theme defaults.
-* **Native XDG Desktop Portal FileChooser**: a built-in backend so browsers and desktop applications use atlifm for Open File and Save File dialogs (`atlifm --setup-portal`).
+* **Native XDG Desktop Portal FileChooser & Default File Manager**: a built-in backend so browsers and desktop applications use atlifm for file chooser dialogs and folder viewing (`atlifm --setdefault`).
 * **FreeDesktop Trash support**: compliant trash management with safe moves to trash, undo rollback, and a dedicated Clear Bin action.
 
 ***
@@ -45,7 +45,7 @@ atlifm bridges this gap. It preserves the strict monospace, border-aligned, zero
 
 | Item | Value |
 | ---- | ----- |
-| Version | 1.0.1 |
+| Version | 1.0.2 |
 | Language and toolkit | C++23, Qt6 |
 | License | MIT |
 | Source code | `https://github.com/1nfys/atlifm` |

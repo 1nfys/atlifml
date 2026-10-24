@@ -275,10 +275,22 @@ Custom plugin actions appear in the same overlay under the `PLUGINS` section as 
 
 atlifm provides an integrated XDG Desktop Portal FileChooser backend. When enabled, desktop browsers (Chromium, Firefox, Zen, Brave) and GTK/Qt applications automatically use atlifm for Open File and Save File dialogs.
 
-To configure atlifm as your default file picker:
+To configure atlifm as your default file manager and file picker:
+
+```bash
+atlifm --setdefault
+```
+
+To configure only the file chooser portal:
 
 ```bash
 atlifm --setup-portal
+```
+
+To configure only the default file manager:
+
+```bash
+atlifm --setup-file-manager
 ```
 
 Or execute the standalone shell script:

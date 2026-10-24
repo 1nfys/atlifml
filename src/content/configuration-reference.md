@@ -76,6 +76,7 @@ Flat `key = value` format. Lines starting with `#` are comments; unknown keys ar
 | `show_preview` | `true` | Show or hide the right preview pane. |
 | `parent_column_width` | `300` | Initial parent column width in pixels. |
 | `preview_width` | `420` | Initial preview pane width in pixels. |
+| `first_run` | `true` | one-time default file manager prompt on startup. set to `false` to suppress the prompt. |
 
 ### Search Configuration
 
@@ -245,6 +246,10 @@ atlifm integrates smoothly with popular Linux command-line tools:
 | Invocation | Effect |
 | :--- | :--- |
 | `atlifm [directory]` | Open atlifm at the given directory (defaults to current directory / home). |
-| `atlifm --portal` | Run as the XDG desktop portal FileChooser backend (D-Bus activatable). |
+| `atlifm --setdefault` | install and configure atlifm as the default file manager and filechooser portal backend. |
+| `atlifm --setup-file-manager` | install atlifm as the default file manager for the current user. |
 | `atlifm --setup-portal` | Install and configure atlifm as the default XDG FileChooser portal backend. |
+| `atlifm --file-manager` | run as the org.freedesktop.filemanager1 dbus service. |
+| `atlifm --properties <path>` | open the properties panel for the given path. |
+| `atlifm --portal` | Run as the XDG desktop portal FileChooser backend (D-Bus activatable). |
 | `atlifm --help`, `atlifm --version` | Print usage or version information. |

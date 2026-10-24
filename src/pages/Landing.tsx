@@ -6,7 +6,7 @@ import LogoDots from "../components/LogoDots";
 import { REPO_URL } from "../docs";
 
 const RELEASES_URL = "https://github.com/1nfys/atlifm/releases/latest";
-const RELEASE_URL = "https://github.com/1nfys/atlifm/releases/tag/v1.0.1";
+const RELEASE_URL = "https://github.com/1nfys/atlifm/releases/tag/v1.0.2";
 
 const features = [
   {
@@ -101,10 +101,10 @@ const installs = {
     label: "arch linux",
     channel: "pacman",
     note: "x86_64 package from the release page. for other architectures build the PKGBUILD.",
-    commands: ["sudo pacman -U atlifm-1.0.1-1-x86_64.pkg.tar.zst"],
+    commands: ["sudo pacman -U atlifm-1.0.2-1-x86_64.pkg.tar.zst"],
     download: {
       label: "pkg.tar.zst",
-      href: `${RELEASES_URL}/download/atlifm-1.0.1-1-x86_64.pkg.tar.zst`,
+      href: `${RELEASES_URL}/download/atlifm-1.0.2-1-x86_64.pkg.tar.zst`,
     },
   },
   fedora: {
@@ -114,7 +114,7 @@ const installs = {
     commands: ["sudo dnf copr enable 1nfys/atlifm", "sudo dnf install atlifm"],
     download: {
       label: "rpm",
-      href: `${RELEASES_URL}/download/atlifm-1.0.1-1.fc44.x86_64.rpm`,
+      href: `${RELEASES_URL}/download/atlifm-1.0.2-1.fc44.x86_64.rpm`,
     },
   },
   opensuse: {
@@ -141,17 +141,17 @@ const installs = {
     ],
     download: {
       label: ".deb",
-      href: `${RELEASES_URL}/download/atlifm_1.0.1-1_amd64.deb`,
+      href: `${RELEASES_URL}/download/atlifm_1.0.2-1_amd64.deb`,
     },
   },
   debian: {
     label: "debian",
     channel: "apt",
     note: "standalone package, x86_64 shown. an arm64 build is available on the release page.",
-    commands: ["sudo apt install ./atlifm_1.0.1-1_amd64.deb"],
+    commands: ["sudo apt install ./atlifm_1.0.2-1_amd64.deb"],
     download: {
       label: ".deb",
-      href: `${RELEASES_URL}/download/atlifm_1.0.1-1_amd64.deb`,
+      href: `${RELEASES_URL}/download/atlifm_1.0.2-1_amd64.deb`,
     },
   },
   obs: {
@@ -172,20 +172,20 @@ const installs = {
     label: "alpine",
     channel: "apk",
     note: "x86_64 package, aarch64 is attached to the same release.",
-    commands: ["sudo apk add --allow-untrusted ./atlifm-1.0.1-r0-x86_64.apk"],
+    commands: ["sudo apk add --allow-untrusted ./atlifm-1.0.2-r0-x86_64.apk"],
     download: {
       label: ".apk",
-      href: `${RELEASES_URL}/download/atlifm-1.0.1-r0-x86_64.apk`,
+      href: `${RELEASES_URL}/download/atlifm-1.0.2-r0-x86_64.apk`,
     },
   },
   appimage: {
     label: "appimage",
     channel: "portable",
     note: "self-contained bundle, no installation into the system.",
-    commands: ["chmod +x atlifm-1.0.1-x86_64.AppImage", "./atlifm-1.0.1-x86_64.AppImage"],
+    commands: ["chmod +x atlifm-1.0.2-x86_64.AppImage", "./atlifm-1.0.2-x86_64.AppImage"],
     download: {
       label: "appimage",
-      href: `${RELEASES_URL}/download/atlifm-1.0.1-x86_64.AppImage`,
+      href: `${RELEASES_URL}/download/atlifm-1.0.2-x86_64.AppImage`,
     },
   },
   source: {
@@ -250,7 +250,7 @@ export default function Landing() {
         <div className="rail-head rail-head-spaced">release</div>
         <a className="rail-item" href={RELEASES_URL} target="_blank" rel="noreferrer">
           <span className="rail-mark" />
-          v1.0.1
+          v1.0.2
           <span className="rail-meta">↗</span>
         </a>
         <a className="rail-item" href={REPO_URL} target="_blank" rel="noreferrer">
@@ -279,7 +279,7 @@ export default function Landing() {
           <div className="hero-split">
             <div className="hero-content">
               <div className="hero-kicker">
-                <span className="accent">v1.0.1</span>
+                <span className="accent">v1.0.2</span>
                 <span className="sep">/</span>
                 <span>linux</span>
                 <span className="sep">/</span>
@@ -298,7 +298,7 @@ export default function Landing() {
               </p>
               <div className="hero-actions">
                 <a className="btn btn-primary" href={RELEASES_URL} target="_blank" rel="noreferrer">
-                  download v1.0.1
+                  download v1.0.2
                 </a>
                 <Link className="btn" to="/docs/welcome">
                   documentation
@@ -332,7 +332,7 @@ export default function Landing() {
             <img src={mainShot} alt="atlifm main window with miller columns, tabs and preview" />
             <figcaption>
               <span>main window · miller columns, tabs and multi-engine preview</span>
-              <span className="caption-meta">atlifm v1.0.1</span>
+              <span className="caption-meta">atlifm v1.0.2</span>
             </figcaption>
           </figure>
         </section>

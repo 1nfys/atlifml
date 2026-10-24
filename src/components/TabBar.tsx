@@ -30,7 +30,7 @@ export default function TabBar() {
       <div className="tabbar-right">
         <span className="release-state">
           <span className="release-dot" />
-          v1.0.1
+          v1.0.2
         </span>
         <a className="gh-btn" href={REPO_URL} target="_blank" rel="noreferrer">
           <span className="gh-mark">↗</span> github

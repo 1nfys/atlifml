@@ -52,7 +52,7 @@ filter = Ctrl+F
 * Plugin actions appear here too: a plugin's `Keys` value is used as the default until the user overrides or disables it.
 * Duplicate combinations are skipped at startup with a warning to prevent ambiguous shortcuts.
 
-The complete action list, grouped into six sections (TABS, NAVIGATION & SORTING, LAYOUT, FILE OPERATIONS, SEARCH & FILTER, GENERAL), is available in the User Guide and directly in the `F1` cheat sheet.
+The complete action list, grouped into six sections (tabs, navigation & sorting, layout, file operations, search & filter, general), is available in the User Guide and directly in the `F1` cheat sheet.
 
 ***
 
@@ -181,7 +181,7 @@ Plugin definitions live in `~/.config/atlifm/plugins/`. Each `.conf` file define
 | `Name` / `Exec` | yes | Menu label and command line |
 | `Extensions` / `AppliesTo` | no | File type and target filtering (`files`, `dirs`, `any`) |
 | `Detach` | no | Detached launch instead of output capture in overlay |
-| `Action` / `Keys` | no | Custom bindable action ID and its default shortcut |
+| `Action` / `Keys` | no | Custom bindable action id and its default shortcut |
 | `Command` / `CommandMode` | no | Status bar command token (`Ctrl+F`) and execution mode (`query` or `action`) |
 | `CommandTitle` / `CommandDescription` | no | Tooltip title and description for status bar token completion |
 | `CommandPlaceholder` | no | Placeholder hint displayed after the command token in the input bar |
@@ -219,8 +219,8 @@ Plugin child processes additionally receive:
 | `ATLIFM_SELECTION` | Selected paths, one per line |
 | `ATLIFM_FILE` | First selected path (empty when selection is empty) |
 | `ATLIFM_TARGET` | First selected path; falls back to current directory |
-| `ATLIFM_PID` | atlifm process ID |
-| `ATLIFM_ACTION` | Plugin `Action` ID when defined; `preview` for preview plugins |
+| `ATLIFM_PID` | atlifm process id |
+| `ATLIFM_ACTION` | Plugin `Action` id when defined; `preview` for preview plugins |
 | `ATLIFM_QUERY` | Search query typed after the command token in `Ctrl+F` status bar input |
 
 ***

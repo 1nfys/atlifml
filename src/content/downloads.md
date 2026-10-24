@@ -48,7 +48,7 @@ cd packaging/arch
 makepkg -si
 ```
 
-The pkgbuild is AUR-ready, but atlifm is not currently published in the AUR.
+The pkgbuild is aur-ready, but atlifm is not currently published in the aur.
 
 ***
 
@@ -111,26 +111,29 @@ sudo zypper refresh
 sudo zypper install atlifm
 ```
 
-### Debian 13
+### debian 13
 
 ```bash
-echo 'deb https://download.opensuse.org/repositories/home:/1nfys/Debian_13/ /' \
-  | sudo tee /etc/apt/sources.list.d/atlifm.list
+sudo apt install -y curl gnupg
+sudo install -d -m 0755 /etc/apt/keyrings
 curl -fsSL https://download.opensuse.org/repositories/home:/1nfys/Debian_13/Release.key \
-  | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/atlifm.gpg > /dev/null
-sudo apt update
-sudo apt install atlifm
+  | gpg --dearmor | sudo tee /etc/apt/keyrings/home_1nfys.gpg > /dev/null
+echo 'deb [signed-by=/etc/apt/keyrings/home_1nfys.gpg] https://download.opensuse.org/repositories/home:/1nfys/Debian_13/ /' \
+  | sudo tee /etc/apt/sources.list.d/atlifm.list
+sudo apt update && sudo apt install atlifm
 ```
 
-### Ubuntu 26.04
+if debian asks to add the openpgp key (`caec40f2bd9e9e1edb00d7caa31425f3388313de`) or reports missing public key, the command above imports the obs key into `/etc/apt/keyrings/home_1nfys.gpg` and attaches it via `signed-by`
+
+### ubuntu 26.04
 
 ```bash
-echo 'deb https://download.opensuse.org/repositories/home:/1nfys/xUbuntu_26.04/ /' \
-  | sudo tee /etc/apt/sources.list.d/atlifm.list
+sudo install -d -m 0755 /etc/apt/keyrings
 curl -fsSL https://download.opensuse.org/repositories/home:/1nfys/xUbuntu_26.04/Release.key \
-  | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/atlifm.gpg > /dev/null
-sudo apt update
-sudo apt install atlifm
+  | gpg --dearmor | sudo tee /etc/apt/keyrings/home_1nfys.gpg > /dev/null
+echo 'deb [signed-by=/etc/apt/keyrings/home_1nfys.gpg] https://download.opensuse.org/repositories/home:/1nfys/xUbuntu_26.04/ /' \
+  | sudo tee /etc/apt/sources.list.d/atlifm.list
+sudo apt update && sudo apt install atlifm
 ```
 
 ### Fedora 44
@@ -169,7 +172,7 @@ If fuse is unavailable, run it with `--appimage-extract-and-run`. To integrate i
 
 ## Build From Source
 
-A C++23 compiler (GCC 13+ or Clang 16+) and qt 6.5+ are required. Install the dependencies for your distribution:
+A C++23 compiler (gcc 13+ or clang 16+) and qt 6.5+ are required. Install the dependencies for your distribution:
 
 ```bash
 # Arch Linux / Manjaro
@@ -196,7 +199,7 @@ cmake --install build --prefix ~/.local
 update-desktop-database ~/.local/share/applications
 ```
 
-Make sure `~/.local/bin` is in `PATH`. The installed binary can also serve as the xdg portal backend; see the [User Guide](/docs/user-guide#6-xdg-desktop-portal-setup).
+Make sure `~/.local/bin` is in `path`. The installed binary can also serve as the xdg portal backend; see the [User Guide](/docs/user-guide#6-xdg-desktop-portal-setup).
 
 ***
 

@@ -22,7 +22,7 @@ atlifm bridges this gap. It preserves the strict monospace, border-aligned, zero
 * **Multi-pane Miller columns**: parent folder on the left, current folder in the center, preview on the right. Columns collapse automatically in narrow windows.
 * **Multiple independent windows**: every launch opens a separate, standalone window that tiling window managers can tile side by side. Each window maintains its own tabs and navigation history.
 * **Strict double-click file opening**: prevents accidental file execution on simple item selection; a single click strictly focuses items.
-* **Deep OS drag and drop**: outbound and inbound file dragging between atlifm and external applications (Telegram, Discord, Chromium, GIMP, LibreOffice, or terminal windows) with dark drag badges. Dragging with Alt held down displays a micro-menu with Copy, Move, and Symlink options.
+* **Deep os drag and drop**: outbound and inbound file dragging between atlifm and external applications (Telegram, Discord, Chromium, gimp, LibreOffice, or terminal windows) with dark drag badges. Dragging with Alt held down displays a micro-menu with Copy, Move, and Symlink options.
 * **Top tabs with independent history**: tabs shrink dynamically, can be scrolled with the mouse wheel, closed with middle click, and pinned with `Ctrl+P`. Each tab keeps its own forward and backward navigation history.
 * **Multi-engine preview pane**: hardware accelerated image and svg viewer with interactive zoom and pan; code viewer with a line number gutter and syntax highlighting for C++, Rust, Python, Bash, and many other languages; recursive directory tree inspector; and a 16-byte binary hex dump.
 * **Video and pdf preview**: video thumbnails via `ffmpegthumbnailer` or `ffmpeg`, scrollable pdf pages via `pdftoppm` with `J` / `K` navigation when the preview pane has focus, background rendering, disk lru cache, and neighbor prefetch.
@@ -47,7 +47,7 @@ atlifm bridges this gap. It preserves the strict monospace, border-aligned, zero
 | ---- | ----- |
 | Version | 1.0.2 |
 | Language and toolkit | C++23, Qt6 |
-| License | MIT |
+| License | mit |
 | Source code | `https://github.com/1nfys/atlifm` |
 | Downloads | [GitHub Releases](https://github.com/1nfys/atlifm/releases/latest) |
 | Configuration | Plain text files in `~/.config/atlifm/` |

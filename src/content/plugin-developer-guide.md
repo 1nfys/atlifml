@@ -8,8 +8,8 @@ atlifm includes a modular plugin engine that lets users and developers add exter
 
 Plugins are plain-text files located in `~/.config/atlifm/plugins/`:
 
-* **`.conf` plugins**: one `.conf` file defines one plugin; the file base name is the plugin ID (for example, `vscode.conf` has the ID `vscode`).
-* **Script plugins**: executable `*.sh`, `*.py`, and `*.bash` files in the same directory are registered automatically; the ID is the base name without the extension.
+* **`.conf` plugins**: one `.conf` file defines one plugin; the file base name is the plugin id (for example, `vscode.conf` has the id `vscode`).
+* **Script plugins**: executable `*.sh`, `*.py`, and `*.bash` files in the same directory are registered automatically; the id is the base name without the extension.
 * **Dynamic discovery**: atlifm scans and loads plugins on startup; plugins can be added, edited, or removed without rebuilding.
 * **Directory override**: set the `ATLIFM_CONFIG_DIR` environment variable to redirect all configuration lookups, which is useful for testing with an isolated profile.
 * **Conflicts**: when a script and a `.conf` file share the same base name, the `.conf` definition wins and the script is ignored. A same-named `.conf` or script also takes over the menu entry of a native `.so` plugin, although the plugin still services its overrides, previews, and hooks.
@@ -18,7 +18,7 @@ Plugins are plain-text files located in `~/.config/atlifm/plugins/`:
 Plugin integration points:
 
 * Context menu: `Plugins` submenu, enabled per selection.
-* Cheat sheet: `F1` overlay; plugins with a custom action appear in the `PLUGINS` section.
+* Cheat sheet: `F1` overlay; plugins with a custom action appear in the `plugins` section.
 * Action engine: custom actions are bindable in `keybinds.conf`, and built-in operations can be intercepted via overrides.
 * Preview pane: preview plugins can replace the built-in preview for matching files.
 * Event hooks: background commands triggered by application events.
@@ -35,11 +35,11 @@ When a plugin configuration contains invalid values, the offending entries are s
 | `Name`        | String  | Required. Label displayed in context menus and the cheat sheet.                                                         |
 | `Exec`        | String  | Required. Command line to run. Parsed with shell-like quoting, so `Exec = sh -c "echo hi"` works.                       |
 | `Type`        | String  | Optional. Set to `preview` to turn the plugin into a preview plugin.                                                    |
-| `Extensions`  | List    | Optional. Comma-separated file extensions (`cpp, .HPP` is normalized to `.cpp, .hpp`). If omitted, every file matches. Plugins with extensions never match directories. |
+| `Extensions`  | List    | Optional. Comma-separated file extensions (`cpp, .hpp` is normalized to `.cpp, .hpp`). If omitted, every file matches. Plugins with extensions never match directories. |
 | `AppliesTo`   | String  | Target filter: `files`, `dirs`, or `any` (default: `any`).                                                              |
 | `Detach`      | Boolean | `true`, `1`, or `yes` launches the process detached in the background (suitable for gui apps); `false` captures output into the terminal output overlay. |
 | `Description` | String  | Tooltip description for the plugin entry.                                                                               |
-| `Action`      | String  | Registers a custom action ID that can be bound to keys in `keybinds.conf`.                                              |
+| `Action`      | String  | Registers a custom action id that can be bound to keys in `keybinds.conf`.                                              |
 | `Keys`        | String  | Default keyboard shortcut for the action (for example, `Ctrl+Alt+V`). Users may rebind or disable it like any built-in action. |
 | `Command`     | String  | Optional. Unique lowercase command token for the `Ctrl+F` status bar input. Typing `token ` activates this plugin. Cannot override built-in `fd` or `rg`. |
 | `CommandMode` | String  | `query` (passes text typed after token to plugin via `ATLIFM_QUERY`) or `action` (ignores typed text, runs on Enter). Default: `query`. |
@@ -57,11 +57,11 @@ Parsing rules:
 
 ### Identifier Validation Rules
 
-The `Action` ID and every entry in `Override` must satisfy strict validation:
+The `Action` id and every entry in `Override` must satisfy strict validation:
 
-* Must begin with a lowercase ASCII letter (`a-z`).
-* May only contain lowercase ASCII letters, digits (`0-9`), and underscores (`_`).
-* **Sudo protection**: any ID containing `sudo` (case-insensitive) is rejected to prevent accidental privilege escalation.
+* Must begin with a lowercase ascii letter (`a-z`).
+* May only contain lowercase ascii letters, digits (`0-9`), and underscores (`_`).
+* **Sudo protection**: any id containing `sudo` (case-insensitive) is rejected to prevent accidental privilege escalation.
 
 Rejected identifiers are removed during parsing and their reasons are collected in the plugin's `rejected` list. IDs are also re-validated at execution time as defense in depth, so an invalid or sudo-related override can never run.
 
@@ -77,8 +77,8 @@ Every plugin process receives contextual information through the environment:
 | `ATLIFM_SELECTION` | Newline-separated list of absolute paths for all currently selected items.                                                         |
 | `ATLIFM_FILE`      | First selected path, or empty when nothing is selected.                                                                            |
 | `ATLIFM_TARGET`    | First selected path; falls back to the current directory.                                                                          |
-| `ATLIFM_PID`       | Process ID of the running atlifm instance.                                                                                         |
-| `ATLIFM_ACTION`    | The plugin's own `Action` ID when it defines one; `preview` for preview plugins. Not set when the plugin has no `Action`.          |
+| `ATLIFM_PID`       | Process id of the running atlifm instance.                                                                                         |
+| `ATLIFM_ACTION`    | The plugin's own `Action` id when it defines one; `preview` for preview plugins. Not set when the plugin has no `Action`.          |
 | `ATLIFM_QUERY`     | The search query typed after the command token in the `Ctrl+F` status bar input. Only set for command plugins.                     |
 
 
@@ -91,7 +91,7 @@ The child process starts with `ATLIFM_DIR` as its working directory, and atlifm 
 When `Detach = false`, the process runs with merged `stdout` and `stderr`. Its output streams in real time into the tui overlay positioned in the bottom-right corner of the window:
 
 * The title shows `▸ name: running…` and switches to `done` or `failed (exit N)` when the process finishes.
-* Output chunks are buffered so UTF-8 characters and lines are never split mid-sequence (up to 5000 blocks are kept).
+* Output chunks are buffered so utf-8 characters and lines are never split mid-sequence (up to 5000 blocks are kept).
 * `Esc` hides the overlay; the process is not killed and keeps running.
 
 Detached plugins (`Detach = true`) run with `startDetached` and do not capture output; a short status-bar message confirms the launch.
@@ -100,14 +100,14 @@ Detached plugins (`Detach = true`) run with `startDetached` and do not capture o
 
 ## 4. Custom Actions and Shortcuts
 
-A plugin can register its own action ID:
+A plugin can register its own action id:
 
 ```ini
 Action = open_in_vscode
 Keys = Ctrl+Alt+V
 ```
 
-* The action appears in the cheat sheet (`F1`) under the `PLUGINS` section as soon as the plugin defines an `Action`.
+* The action appears in the cheat sheet (`F1`) under the `plugins` section as soon as the plugin defines an `Action`.
 * `Keys` provides a default binding; the user may rebind or disable it in `keybinds.conf` exactly like a built-in action.
 * Action IDs that collide with built-in action IDs are discarded.
 * The action is triggered from the `Plugins` submenu, from the default shortcut, or from any key the user assigns.
@@ -124,8 +124,8 @@ Override = rename, open_terminal
 
 How overriding works:
 
-* Overrides cover the whole application surface: keyboard actions (any ID from `keybinds.conf`), context menu items, including those without hotkeys, mouse paths (back/forward buttons, double-click open), the tab bar context menu, the bookmarks panel menu, and dialogs such as `Open With`.
-* Privileged flows are excluded: sudo, polkit, and desktop portal operations never pass through the plugin dispatcher, and any override ID containing `sudo` is rejected at parse time.
+* Overrides cover the whole application surface: keyboard actions (any id from `keybinds.conf`), context menu items, including those without hotkeys, mouse paths (back/forward buttons, double-click open), the tab bar context menu, the bookmarks panel menu, and dialogs such as `Open With`.
+* Privileged flows are excluded: sudo, polkit, and desktop portal operations never pass through the plugin dispatcher, and any override id containing `sudo` is rejected at parse time.
 * An override only fires when the plugin matches the current selection: `AppliesTo` and `Extensions` are checked against every selected item. If the plugin does not match, the built-in behavior runs unchanged.
 * With an empty selection (background context menu), the override applies unconditionally.
 * When several plugins override the same action, C++ plugins are tried first, then `.conf` plugins in alphabetical load order; the first plugin that returns "handled" wins.
@@ -170,7 +170,7 @@ While ordinary actions stream output into a compact bottom-right corner overlay,
   * `@@pane:2` directs subsequent text into the right pane (preview column).
   * Any text printed before the first marker is placed in the center pane (`pane 1`).
 * **Native C++ Plugins**: Call `output_write_pane(pane, text)` with `pane` set to `0`, `1`, or `2`. Standard `output_write(text)` appends to the center pane (`1`).
-* **Formatting**: Text is rendered in monospace with no word-wrapping and horizontal scrollbars as needed, preserving UTF-8 tables, ANSI-free ASCII art, and terminal pseudographics.
+* **Formatting**: Text is rendered in monospace with no word-wrapping and horizontal scrollbars as needed, preserving utf-8 tables, ansi-free ascii art, and terminal pseudographics.
 * **Dismissing**: Press `Esc` or click `Close` in the overlay header to dismiss the three-pane view and return focus directly to the Miller columns.
 
 ***
@@ -180,7 +180,7 @@ While ordinary actions stream output into a compact bottom-right corner overlay,
 Set `Type = preview` to replace the built-in preview pane for matching files:
 
 ```ini
-Name = JSON Preview
+Name = json Preview
 Exec = python3 -m json.tool
 Extensions = .json
 Type = preview
@@ -220,8 +220,8 @@ Hook = on_start, on_navigate
 
 Any executable file named `*.sh`, `*.py`, or `*.bash` inside the plugins directory is registered as a plugin automatically:
 
-* The plugin ID is the file name without the extension (`backup.py` has the ID `backup`).
-* The menu label defaults to the ID, and the script runs directly via its shebang.
+* The plugin id is the file name without the extension (`backup.py` has the id `backup`).
+* The menu label defaults to the id, and the script runs directly via its shebang.
 * Script plugins behave like a plain `Detach = false` plugin with `AppliesTo = any` and no extension filter.
 * A same-named `.conf` file takes precedence and disables the script entry.
 * The file must be executable (`chmod +x`) or it is not discovered.
@@ -302,7 +302,7 @@ typedef struct AtlifmInvocation {
 } AtlifmInvocation;
 ```
 
-All strings are UTF-8 and remain valid only for the duration of the call; copy anything you need to keep. `query` contains the search query typed after the command token in `Ctrl+F` status bar input.
+All strings are utf-8 and remain valid only for the duration of the call; copy anything you need to keep. `query` contains the search query typed after the command token in `Ctrl+F` status bar input.
 
 ### Actions & Command Tokens
 
@@ -337,7 +337,7 @@ d.user = const_cast<AtlifmHostApi*>(api);
 api->register_action(&d);
 ```
 
-Actions appear in the `Plugins` submenu, can be rebound in `keybinds.conf`, and show up in the cheat sheet (`F1`) under `PLUGINS`. When `command` is set, typing the token in the `Ctrl+F` status bar activates the command. The optional `enabled` callback hides the entry when it returns `0` or less. Action IDs must be unique across all plugins.
+Actions appear in the `Plugins` submenu, can be rebound in `keybinds.conf`, and show up in the cheat sheet (`F1`) under `plugins`. When `command` is set, typing the token in the `Ctrl+F` status bar activates the command. The optional `enabled` callback hides the entry when it returns `0` or less. Action IDs must be unique across all plugins.
 
 ### Overrides
 
@@ -408,17 +408,17 @@ Keys = Ctrl+Alt+D
 
 ### Example C: Image Optimizer
 
-Optimize PNG files in place using `oxipng`:
+Optimize png files in place using `oxipng`:
 
 `~/.config/atlifm/plugins/optimize_png.conf`
 
 ```ini
-Name = Optimize PNG
+Name = Optimize png
 Exec = oxipng -o 4 --strip all
 Extensions = .png
 AppliesTo = files
 Detach = false
-Description = Losslessly compress PNG images
+Description = Losslessly compress png images
 ```
 
 ### Example D: Custom Terminal Launcher Override
@@ -460,7 +460,7 @@ Append every visited directory to a log file:
 
 ```bash
 #!/bin/sh
-printf '%s\n' "$ATLIFM_DIR" >> "$HOME/atlifm-navigation.log"
+printf '%s\n' "$ATLIFM_DIR" >> "$home/atlifm-navigation.log"
 ```
 
 ```ini
@@ -476,7 +476,7 @@ Hook = on_navigate
 
 * Invalid `Action` or `Override` values never fail silently: hover the plugin entry in the `Plugins` submenu to see the rejection reason.
 * Use `ATLIFM_CONFIG_DIR` for an isolated test profile: `ATLIFM_CONFIG_DIR=/tmp/atlifm-test atlifm`.
-* Prefer absolute paths for gui launchers so the command resolves regardless of `PATH`.
+* Prefer absolute paths for gui launchers so the command resolves regardless of `path`.
 * Detached plugins never block the interface, and streaming plugins keep atlifm fully responsive while the overlay fills.
-* Preview plugins should print plain text; ANSI color sequences are shown literally since the preview page is a plain text viewer.
+* Preview plugins should print plain text; ansi color sequences are shown literally since the preview page is a plain text viewer.
 * plugins: verify your compiler flags (`-shared -fPIC`) and the abi check; a non-zero return from `atlifm_plugin_init` quietly skips the library. Keep action IDs unique and remember that preview `render` runs off the gui thread.

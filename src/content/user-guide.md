@@ -95,9 +95,9 @@ Some physical controls are handled directly by the widgets:
 
 ### Tabs
 
-| Action ID | Default Keys | Description |
+| Action id | Default Keys | Description |
 | :--- | :--- | :--- |
-| `new_tab` | `Ctrl+T` | Open new tab in `$HOME` |
+| `new_tab` | `Ctrl+T` | Open new tab in `$home` |
 | `close_tab` | `Ctrl+W`, `Ctrl+F4` | Close active tab |
 | `reopen_tab` | `Ctrl+Shift+T` | Reopen recently closed tab |
 | `pin_tab` | `Ctrl+P` | Pin / unpin active tab |
@@ -108,7 +108,7 @@ Some physical controls are handled directly by the widgets:
 
 ### Navigation & Sorting
 
-| Action ID | Default Keys | Description |
+| Action id | Default Keys | Description |
 | :--- | :--- | :--- |
 | `focus_path` | `Ctrl+L`, `Alt+D`, `F4` | Focus address / path input |
 | `parent_dir` | `Alt+Up` | Navigate to parent directory |
@@ -131,14 +131,14 @@ Some physical controls are handled directly by the widgets:
 
 ### Layout
 
-| Action ID | Default Keys | Description |
+| Action id | Default Keys | Description |
 | :--- | :--- | :--- |
 | `save_layout` | `Ctrl+Shift+S` | Save current splitter widths, panels, and window size to `layout.ini` |
 | `reset_layout` | `Ctrl+Shift+R` | Delete `layout.ini` and reset layout to `theme.conf` defaults |
 
 ### File Operations
 
-| Action ID | Default Keys | Description |
+| Action id | Default Keys | Description |
 | :--- | :--- | :--- |
 | `cut` | `Ctrl+X` | Cut selected items to clipboard |
 | `copy` | `Ctrl+C` | Copy selected items to clipboard |
@@ -159,14 +159,14 @@ Some physical controls are handled directly by the widgets:
 
 ### Search & Filter
 
-| Action ID | Default Keys | Description |
+| Action id | Default Keys | Description |
 | :--- | :--- | :--- |
 | `filter` | `Ctrl+F` | Open transient fuzzy filter bar |
 | `cancel` | `Esc` | Clear filter / close active overlay / clear selection |
 
 ### General
 
-| Action ID | Default Keys | Description |
+| Action id | Default Keys | Description |
 | :--- | :--- | :--- |
 | `help` | `F1`, `?` | Open interactive cheat sheet |
 | `quit` | `Ctrl+Q` | Quit atlifm |
@@ -234,7 +234,7 @@ In any search overlay, `Up` / `Down` navigates the focus without modifying your 
 File operations—copying, moving, trashing, permanent deletion, and archive packing/unpacking—run asynchronously in dedicated background thread pools (`io` and `thumb`).
 
 * The status bar displays real-time aggregate transfer progress and speed.
-* Press `Alt+W` to open the tasks overlay. Each task shows its progress bar, speed in MB/s, estimated time of arrival (eta), and current file.
+* Press `Alt+W` to open the tasks overlay. Each task shows its progress bar, speed in mb/s, estimated time of arrival (eta), and current file.
 * Press `Del` to cancel a running task cleanly. If you cancel a copy or move operation, atlifm initiates an automatic rollback of partially transferred files.
 * Press `Enter` to inspect the complete log output for a specific task.
 
@@ -267,7 +267,7 @@ Pressing `F1` or `?` opens the interactive cheat sheet overlay:
 * **Conflict Prevention**: atlifm blocks conflicting shortcuts and warns about duplicates.
 * **Persistence**: All edits are immediately saved to `~/.config/atlifm/keybinds.conf`.
 
-Custom plugin actions appear in the same overlay under the `PLUGINS` section as soon as a plugin defines an `Action`.
+Custom plugin actions appear in the same overlay under the `plugins` section as soon as a plugin defines an `Action`.
 
 ***
 
@@ -396,7 +396,7 @@ Extend atlifm with external commands from `~/.config/atlifm/plugins/`. Each `.co
 
 Key capabilities:
 
-* **Custom actions and shortcuts**: a plugin can register a new action that becomes bindable in `keybinds.conf` and appears in the cheat sheet (`F1`) under `PLUGINS`.
+* **Custom actions and shortcuts**: a plugin can register a new action that becomes bindable in `keybinds.conf` and appears in the cheat sheet (`F1`) under `plugins`.
 * **Overrides**: intercept nearly every built-in operation, keyboard actions, context menus, mouse paths, tab bar, bookmarks panel, with your own command; sudo, polkit, and portal flows are excluded.
 * **Preview plugins**: replace the built-in preview pane for matching file types with your own command output.
 * **Event hooks**: run commands in the background on `on_start`, `on_navigate`, and `on_select` events.

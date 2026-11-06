@@ -45,7 +45,7 @@ atlifm bridges this gap. It preserves the strict monospace, border-aligned, zero
 
 | Item | Value |
 | ---- | ----- |
-| Version | 1.0.2 |
+| Version | 1.0.3 |
 | Language and toolkit | C++23, Qt6 |
 | License | mit |
 | Source code | `https://github.com/1nfys/atlifm` |

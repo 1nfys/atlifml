@@ -1,6 +1,6 @@
 # Downloads
 
-atlifm **1.0.2** is available as prebuilt packages for Linux on **x86_64** and **aarch64**, as a self-contained appimage, and as source.
+atlifm **1.0.3** is available as prebuilt packages for Linux on **x86_64** and **aarch64**, as a self-contained appimage, and as source.
 
 Every artifact is attached to the [GitHub release](https://github.com/1nfys/atlifm/releases/latest). Binary packages use the qt 6 libraries provided by your distribution; the appimage bundles qt and runs on distributions with glibc 2.38 or newer.
 
@@ -20,13 +20,13 @@ The table lists the release range covered by prebuilt packages. Older distributi
 
 | System | Package | Architectures |
 | :--- | :--- | :--- |
-| Arch Linux / Manjaro | `atlifm-1.0.2-1-x86_64.pkg.tar.zst` | x86_64 |
-| Debian / Ubuntu | `atlifm_1.0.2-1_amd64.deb`, `atlifm_1.0.2-1_arm64.deb` | x86_64, aarch64 |
-| Fedora / rhel | `atlifm-1.0.2-1.fc44.x86_64.rpm`, `atlifm-1.0.2-1.fc44.aarch64.rpm` | x86_64, aarch64 |
-| Alpine Linux | `atlifm-1.0.2-r0-x86_64.apk`, `atlifm-1.0.2-r0-aarch64.apk` | x86_64, aarch64 |
-| Any glibc 2.38+ distribution | `atlifm-1.0.2-x86_64.appimage`, `atlifm-1.0.2-aarch64.appimage` | x86_64, aarch64 |
+| Arch Linux / Manjaro | `atlifm-1.0.3-1-x86_64.pkg.tar.zst` | x86_64 |
+| Debian / Ubuntu | `atlifm_1.0.3-1_amd64.deb`, `atlifm_1.0.3-1_arm64.deb` | x86_64, aarch64 |
+| Fedora / rhel | `atlifm-1.0.3-1.fc44.x86_64.rpm`, `atlifm-1.0.3-1.fc44.aarch64.rpm` | x86_64, aarch64 |
+| Alpine Linux | `atlifm-1.0.3-r0-x86_64.apk`, `atlifm-1.0.3-r0-aarch64.apk` | x86_64, aarch64 |
+| Any glibc 2.38+ distribution | `atlifm-1.0.3-x86_64.appimage`, `atlifm-1.0.3-aarch64.appimage` | x86_64, aarch64 |
 | obs repository | openSUSE Tumbleweed, Debian 13, Ubuntu 26.04, Fedora 43 / 44 | x86_64, aarch64 |
-| Source | `atlifm-1.0.2.tar.gz`, `atlifm_1.0.2.orig.tar.gz` | all |
+| Source | `atlifm-1.0.3.tar.gz`, `atlifm_1.0.3.orig.tar.gz` | all |
 
 The release page also contains debug symbols, the Debian source package (`.dsc`, `.debian.tar.xz`) and the rpm source package (`.src.rpm`).
 
@@ -37,7 +37,7 @@ The release page also contains debug symbols, the Debian source package (`.dsc`,
 Download the pacman package from the [release page](https://github.com/1nfys/atlifm/releases/latest), then install it:
 
 ```bash
-sudo pacman -U atlifm-1.0.2-1-x86_64.pkg.tar.zst
+sudo pacman -U atlifm-1.0.3-1-x86_64.pkg.tar.zst
 ```
 
 To build the package locally from this repository:
@@ -65,8 +65,8 @@ sudo apt install atlifm
 On Debian, Ubuntu and their derivatives, install the `.deb` from the release page directly:
 
 ```bash
-sudo apt install ./atlifm_1.0.2-1_amd64.deb     # x86_64
-sudo apt install ./atlifm_1.0.2-1_arm64.deb     # aarch64
+sudo apt install ./atlifm_1.0.3-1_amd64.deb     # x86_64
+sudo apt install ./atlifm_1.0.3-1_arm64.deb     # aarch64
 ```
 
 `apt` resolves the qt 6 runtime dependencies automatically. If your distribution ships qt older than 6.5, use the appimage instead.
@@ -93,8 +93,8 @@ sudo dnf install atlifm
 Alternatively, install the rpm from the release page:
 
 ```bash
-sudo dnf install ./atlifm-1.0.2-1.fc44.x86_64.rpm     # x86_64
-sudo dnf install ./atlifm-1.0.2-1.fc44.aarch64.rpm    # aarch64
+sudo dnf install ./atlifm-1.0.3-1.fc44.x86_64.rpm     # x86_64
+sudo dnf install ./atlifm-1.0.3-1.fc44.aarch64.rpm    # aarch64
 ```
 
 ***
@@ -149,8 +149,8 @@ sudo dnf install atlifm
 ## Alpine Linux
 
 ```bash
-sudo apk add --allow-untrusted ./atlifm-1.0.2-r0-x86_64.apk     # x86_64
-sudo apk add --allow-untrusted ./atlifm-1.0.2-r0-aarch64.apk    # aarch64
+sudo apk add --allow-untrusted ./atlifm-1.0.3-r0-x86_64.apk     # x86_64
+sudo apk add --allow-untrusted ./atlifm-1.0.3-r0-aarch64.apk    # aarch64
 ```
 
 For a repository build, copy `packaging/alpine/` into your aports clone and run `abuild checksum && abuild -r`.
@@ -162,8 +162,8 @@ For a repository build, copy `packaging/alpine/` into your aports clone and run 
 The appimage is a single self-contained file and does not install anything into the system. It requires glibc 2.38 or newer:
 
 ```bash
-chmod +x atlifm-1.0.2-x86_64.appimage
-./atlifm-1.0.2-x86_64.appimage
+chmod +x atlifm-1.0.3-x86_64.appimage
+./atlifm-1.0.3-x86_64.appimage
 ```
 
 If fuse is unavailable, run it with `--appimage-extract-and-run`. To integrate it with the desktop, move the file to a permanent location and create a launcher for it, or use an appimage manager such as Gearlever.

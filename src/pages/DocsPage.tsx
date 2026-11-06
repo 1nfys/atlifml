@@ -29,7 +29,7 @@ export default function DocsPage() {
         ))}
         <div className="side-foot">
           <span>atlifm</span>
-          <span>v1.0.2</span>
+          <span>v1.0.3</span>
         </div>
       </aside>
 

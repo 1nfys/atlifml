@@ -597,6 +597,7 @@ h3[id] {
 }
 
 .caption-meta {
+  flex-shrink: 0;
   overflow: hidden;
   color: var(--overlay0);
   text-overflow: ellipsis;
@@ -1613,6 +1614,22 @@ h3[id] {
 
   .file-kind {
     padding-top: 2px;
+  }
+
+  .shot-figure figcaption {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 6px 9px;
+    min-height: 0;
+    height: auto;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .shot-figure figcaption > span {
+    white-space: normal;
+    word-break: break-word;
   }
 
   .split {

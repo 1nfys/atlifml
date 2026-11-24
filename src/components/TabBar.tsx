@@ -25,7 +25,7 @@ export default function TabBar() {
         </NavLink>
       </nav>
       <div className="tabbar-right">
-        <span className="release-state">v1.0.4</span>
+        <span className="release-state">v1.0.5</span>
         <a className="gh-btn" href={REPO_URL} target="_blank" rel="noreferrer">
           github
         </a>

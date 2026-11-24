@@ -66,7 +66,7 @@ export function getPageMeta(pathname: string): PageMeta {
         description: siteMeta.description,
         url: `${SITE_URL}/`,
         downloadUrl: "https://github.com/1nfys/atlifm/releases/latest",
-        softwareVersion: "1.0.4",
+        softwareVersion: "1.0.5",
         license: "https://opensource.org/licenses/MIT",
         image: OG_IMAGE,
         offers: {

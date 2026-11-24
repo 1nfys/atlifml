@@ -6,7 +6,7 @@ import LogoDots from "../components/LogoDots";
 import { REPO_URL } from "../docs";
 
 const RELEASES_URL = "https://github.com/1nfys/atlifm/releases/latest";
-const RELEASE_URL = "https://github.com/1nfys/atlifm/releases/tag/v1.0.4";
+const RELEASE_URL = "https://github.com/1nfys/atlifm/releases/tag/v1.0.5";
 
 const features = [
   {
@@ -84,10 +84,10 @@ const installs = {
     label: "arch linux",
     channel: "pacman",
     note: "x86_64 package from the release page. for other architectures build the PKGBUILD.",
-    commands: ["sudo pacman -U atlifm-1.0.4-1-x86_64.pkg.tar.zst"],
+    commands: ["sudo pacman -U atlifm-1.0.5-1-x86_64.pkg.tar.zst"],
     download: {
       label: "pkg.tar.zst",
-      href: `${RELEASES_URL}/download/atlifm-1.0.4-1-x86_64.pkg.tar.zst`,
+      href: `${RELEASES_URL}/download/atlifm-1.0.5-1-x86_64.pkg.tar.zst`,
     },
   },
   fedora: {
@@ -97,7 +97,7 @@ const installs = {
     commands: ["sudo dnf copr enable 1nfys/atlifm", "sudo dnf install atlifm"],
     download: {
       label: "rpm",
-      href: `${RELEASES_URL}/download/atlifm-1.0.4-1.fc44.x86_64.rpm`,
+      href: `${RELEASES_URL}/download/atlifm-1.0.5-1.fc44.x86_64.rpm`,
     },
   },
   opensuse: {
@@ -124,17 +124,17 @@ const installs = {
     ],
     download: {
       label: ".deb",
-      href: `${RELEASES_URL}/download/atlifm_1.0.4-1_amd64.deb`,
+      href: `${RELEASES_URL}/download/atlifm_1.0.5-1_amd64.deb`,
     },
   },
   debian: {
     label: "debian",
     channel: "apt",
     note: "standalone package, x86_64 shown. an arm64 build is available on the release page.",
-    commands: ["sudo apt install ./atlifm_1.0.4-1_amd64.deb"],
+    commands: ["sudo apt install ./atlifm_1.0.5-1_amd64.deb"],
     download: {
       label: ".deb",
-      href: `${RELEASES_URL}/download/atlifm_1.0.4-1_amd64.deb`,
+      href: `${RELEASES_URL}/download/atlifm_1.0.5-1_amd64.deb`,
     },
   },
   obs: {
@@ -155,20 +155,20 @@ const installs = {
     label: "alpine",
     channel: "apk",
     note: "x86_64 package, aarch64 is attached to the same release.",
-    commands: ["sudo apk add --allow-untrusted ./atlifm-1.0.4-r0-x86_64.apk"],
+    commands: ["sudo apk add --allow-untrusted ./atlifm-1.0.5-r0-x86_64.apk"],
     download: {
       label: ".apk",
-      href: `${RELEASES_URL}/download/atlifm-1.0.4-r0-x86_64.apk`,
+      href: `${RELEASES_URL}/download/atlifm-1.0.5-r0-x86_64.apk`,
     },
   },
   appimage: {
     label: "appimage",
     channel: "portable",
     note: "self-contained bundle, no installation into the system.",
-    commands: ["chmod +x atlifm-1.0.4-x86_64.AppImage", "./atlifm-1.0.4-x86_64.AppImage"],
+    commands: ["chmod +x atlifm-1.0.5-x86_64.AppImage", "./atlifm-1.0.5-x86_64.AppImage"],
     download: {
       label: "appimage",
-      href: `${RELEASES_URL}/download/atlifm-1.0.4-x86_64.AppImage`,
+      href: `${RELEASES_URL}/download/atlifm-1.0.5-x86_64.AppImage`,
     },
   },
   source: {
@@ -234,7 +234,7 @@ export default function Landing() {
         <nav className="rail-group">
           <div className="rail-head">elsewhere</div>
           <a className="rail-item" href={RELEASES_URL} target="_blank" rel="noreferrer">
-            release v1.0.4
+            release v1.0.5
           </a>
           <a className="rail-item" href={REPO_URL} target="_blank" rel="noreferrer">
             github repository
@@ -264,7 +264,7 @@ export default function Landing() {
               </p>
               <div className="hero-actions">
                 <a className="btn btn-primary" href={RELEASES_URL} target="_blank" rel="noreferrer">
-                  download v1.0.4
+                  download v1.0.5
                 </a>
                 <Link className="text-link" to="/docs/welcome">
                   read the documentation
@@ -286,7 +286,7 @@ export default function Landing() {
 
           <figure className="shot-figure hero-shot">
             <img src={mainShot} alt="atlifm main window with miller columns, tabs and preview" />
-            <figcaption>main window with miller columns, tabs and multi-engine preview, version 1.0.4</figcaption>
+            <figcaption>main window with miller columns, tabs and multi-engine preview, version 1.0.5</figcaption>
           </figure>
         </section>
 

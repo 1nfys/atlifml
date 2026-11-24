@@ -15,7 +15,7 @@ export default function Footer() {
         site source
       </a>
       <span className="sep">|</span>
-      <span>v1.0.4</span>
+      <span>v1.0.5</span>
     </footer>
   );
 }

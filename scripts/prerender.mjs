@@ -24,7 +24,7 @@ function softwareApplicationJsonLd() {
     description: site.description,
     url: `${SITE_URL}/`,
     downloadUrl: "https://github.com/1nfys/atlifm/releases/latest",
-    softwareVersion: "1.0.1",
+    softwareVersion: "1.0.5",
     license: "https://opensource.org/licenses/MIT",
     image: OG_IMAGE,
     offers: {

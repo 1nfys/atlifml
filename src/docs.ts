@@ -12,7 +12,6 @@ export interface DocMeta {
   slug: string;
   title: string;
   description: string;
-  num: string;
   body: string;
 }
 
@@ -24,9 +23,8 @@ const bodies: Record<string, string> = {
   "configuration-reference": configReference,
 };
 
-export const docs: DocMeta[] = siteMeta.docs.map((doc, index) => ({
+export const docs: DocMeta[] = siteMeta.docs.map((doc) => ({
   ...doc,
-  num: String(index + 1),
   body: bodies[doc.slug] ?? "",
 }));
 

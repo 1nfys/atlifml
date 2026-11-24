@@ -16,15 +16,14 @@ export default function DocsPage() {
   return (
     <main className="docs-layout">
       <aside className="docs-side">
-        <div className="side-head">library</div>
+        <div className="side-head">documentation</div>
         {docs.map((d) => (
           <NavLink
             key={d.slug}
             to={`/docs/${d.slug}`}
             className={({ isActive }) => `side-link${isActive ? " active" : ""}`}
           >
-            <span className="n">{d.num}</span>
-            <span>{d.title}</span>
+            {d.title}
           </NavLink>
         ))}
         <div className="side-foot">
@@ -40,7 +39,6 @@ export default function DocsPage() {
           <Link to="/docs/welcome">docs</Link>
           <span className="crumb-sep">/</span>
           <span className="accent">{doc.slug}</span>
-          <span className="crumbs-meta">{doc.num} / {docs.length}</span>
         </div>
         {rest !== undefined ? (
           <>
@@ -55,7 +53,7 @@ export default function DocsPage() {
         <nav className="doc-pager">
           {previous ? (
             <Link className="pager-link" to={`/docs/${previous.slug}`}>
-              <span className="pager-key">← previous</span>
+              <span className="pager-key">previous</span>
               <span className="pager-title">{previous.title}</span>
             </Link>
           ) : (
@@ -63,7 +61,7 @@ export default function DocsPage() {
           )}
           {next ? (
             <Link className="pager-link pager-next" to={`/docs/${next.slug}`}>
-              <span className="pager-key">next →</span>
+              <span className="pager-key">next</span>
               <span className="pager-title">{next.title}</span>
             </Link>
           ) : (

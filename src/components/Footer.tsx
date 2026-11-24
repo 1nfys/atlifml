@@ -10,11 +10,11 @@ export default function Footer() {
       <a href={REPO_URL} target="_blank" rel="noreferrer">
         github.com/1nfys/atlifm
       </a>
-      <span className="sep">·</span>
+      <span className="sep">|</span>
       <a href={SITE_REPO_URL} target="_blank" rel="noreferrer">
         site source
       </a>
-      <span className="sep">·</span>
+      <span className="sep">|</span>
       <span>v1.0.4</span>
     </footer>
   );
